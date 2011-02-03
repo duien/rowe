@@ -1,0 +1,98 @@
+:javascript
+  $(function(){
+    $('#project-select').autocomplete({ source: #{@projects_for_js.to_json},
+      select: function(event, ui) { 
+        console.log(ui);
+        var html = $(#{(render :partial => 'project', :locals => { :project => Project.new }).inspect});
+        html.find('#month_projects__freckle_id').val(ui.item.id);
+        html.find('#month_projects__name').val(ui.item.label);
+        html.find('#month_projects__billable').val(ui.item.billable);
+
+        $('.project-fields.message').addClass('remove');
+        $('#add-project-header').before(html);
+        html.find('#month_projects__name').focus();
+
+        $('#project-select').val('');
+        return false;
+      }
+    })
+
+    $('#tab-controls li').click(function(){
+      selected_tab = $(this).attr('id');
+      $('#tab-controls .tab').removeClass('selected');
+      $(this).addClass('selected');
+
+      $('.tab-content').removeClass('selected');
+      $('#'+selected_tab+'-content').addClass('selected');
+    })
+
+    $('.project-fields .close').live('click', function(){
+      var fields = $(this).parent().parent()
+      var delete_field = fields.find('#month_projects___delete')
+      if(fields.hasClass('deleted')){
+        // delete_field.val(false)
+        fields.removeClass('deleted')
+        fields.find('input').attr('disabled', false)
+        fields.find('.info .close').html('&#10005;').attr('title', 'Delete')
+      } else {
+        // delete_field.val(true)
+        fields.addClass('deleted')
+        fields.find('input').attr('disabled', true)
+        fields.find('.info .close').html('&#8634;').attr('title', 'Undo')
+      }
+    })
+  });
+
+
+%ul#tab-controls
+  %li.tab#freckle{ :class => @user.freckle_set_up? ? nil : 'selected' }
+    %div account
+  %li.tab#projects{ :class => @user.freckle_set_up? ? 'selected' : nil }
+    %div projects
+
+#freckle-content.tab-content{ :class => @user.freckle_set_up? ? nil : 'selected' }
+  = form_for @user, :url => update_settings_path do |f|
+    %fieldset
+      .label
+        = f.label :name, 'Your Name'
+      .data
+        = f.text_field :name
+    %fieldset
+      %h2 Freckle
+    %fieldset
+      .label
+        = f.label :freckle_user_name, 'User Name'
+      .data
+        = f.text_field :freckle_user_name
+    %fieldset
+      .label
+        = f.label :freckle_account, raw('Account <span class="hint">the &lsquo;my-company&rsquo; in my-company.letsfreckle.com</span>')
+      .data
+        = f.text_field :freckle_account
+    %fieldset
+      .label
+        = f.label :freckle_api_token, 'API token'
+      .data
+        = f.text_field :freckle_api_token
+    %fieldset
+      .submit
+        = f.submit
+#projects-content.tab-content{ :class => @user.freckle_set_up? ? 'selected' : nil }
+  = form_for @user.current_month, :url => update_settings_path do |f|
+    = f.hidden_field :last_update, :value => nil
+    .project-fields.header
+      .name Project
+      .budget Budget
+      .start Start
+      .end End
+    - if @user.current_month.projects.empty?
+      .project-fields.message
+        .name.hint Add your first project below!
+    - else
+      = render :partial => 'project', :collection => @user.current_month.projects
+    .project-fields#add-project-header
+      .name
+        %input#project-select{ :placeholder => 'Start typing a project name', :type => 'text' }
+    %fieldset
+      .submit
+        = f.submit 'Update Projects'

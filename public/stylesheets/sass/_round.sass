@@ -1,0 +1,40 @@
+=round_top_left($radius)
+  -moz-border-radius-topleft: $radius
+  -webkit-border-top-left-radius: $radius
+  border-top-left-radius: $radius
+
+=round_top_right($radius)
+  -moz-border-radius-topright: $radius
+  -webkit-border-top-right-radius: $radius
+  border-top-right-radius: $radius
+
+=round_bottom_left($radius)
+  -moz-border-radius-bottomleft: $radius
+  -webkit-border-bottom-left-radius: $radius
+  border-bottom-left-radius: $radius
+
+=round_bottom_right($radius)
+  -moz-border-radius-bottomright: $radius
+  -webkit-border-bottom-right-radius: $radius
+  border-bottom-right-radius: $radius
+
+=round_top($radius)
+  +round_top_left($radius)
+  +round_top_right($radius)
+
+=round_bottom($radius)
+  +round_bottom_left($radius)
+  +round_bottom_right($radius)
+
+=round_left($radius)
+  +round_top_left($radius)
+  +round_bottom_left($radius)
+
+=round_right($radius)
+  +round_top_right($radius)
+  +round_bottom_right($radius)
+
+=round($radius)
+  -moz-border-radius: $radius
+  -webkit-border-radius: $radius
+  border-radius: $radius

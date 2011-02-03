@@ -1,0 +1,43 @@
+!!!
+%html
+  %head
+    %title { results }
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}/
+    = stylesheet_link_tag 'fonts'
+    -# = stylesheet_link_tag 'theme.css'
+    -# %link{:href => "css/themename/jquery-ui-1.8.9.custom.css", :rel => "stylesheet", :type => "text/css"}/
+    = javascript_include_tag 'jquery-1.4.4.min.js'
+    = javascript_include_tag 'jquery-ui-1.8.9.custom.min.js'
+    
+    = stylesheet_link_tag 'application'
+    -# = javascript_include_tag 'http://code.jquery.com/jquery-1.4.4.min.js'
+    = javascript_include_tag 'application'
+    = csrf_meta_tag
+  %body
+    #header
+      .title
+        %h1 results only
+      .user
+        - if user_signed_in?
+          Hello, #{current_user.name}. Need to
+          = succeed '?' do
+            = link_to "sign out", destroy_user_session_path
+    #navigation
+      %ul.menu
+        %li{ :class => current_page?(root_path) ? 'selected' : nil }
+          = link_to 'dashboard', root_path
+        %li{ :class => current_page?(settings_path) ? 'selected' : nil }
+          = link_to 'settings', settings_path
+    #flash
+      - flash.each do |type, message|
+        .flash{ :class => type }
+          .message
+            = image_tag "#{type}-color-dark.png"
+            .close &#10005;
+            = message
+    #page
+      = yield
+    -# .footer
+      .wrap
+        .content
+          Some sort of footer content

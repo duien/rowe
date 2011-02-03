@@ -1,0 +1,413 @@
+@import grid
+@import round
+// Color Scheme
+$gold: #caa91e
+$white: #e6e3b2
+$blue: #76b8ab
+$black: #100f0e
+$green: #8f8b1d
+$red: #d15028
+$orange: mix($red, $gold)
+
+=color-box($color)
+  border-color: $color
+  background: mix(mix($color, $white), $white)
+  .close
+    color: $color
+
+=transition($stuff)
+  -webkit-transition: $stuff
+  -moz-transition: $stuff
+  -o-transition: $stuff
+  transition: $stuff
+  
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,tr,th,td
+  margin: 0
+  padding: 0
+
+
+ul.ui-menu
+  background: lighten($white, 5%)
+  border: 2px solid darken($white, 10%)
+  list-style-type: none
+  width: 376px
+  border-top: none
+  // padding-top: 0.25em
+  // -webkit-box-sizing: border-box
+  li.ui-menu-item
+    a.ui-corner-all
+      display: block
+      padding: 0.5em
+      // border: 2px solid $white
+      color: black
+      &.ui-state-hover
+        // background: lighten($white, 8%)
+        background: darken($white, 10%)
+    &:nth-child(n+6)
+      display: none
+
+.remove
+  display: none !important
+.hide
+  visibility: hidden
+body
+  background: $white
+  color: $black
+  font-family: 'brevia-1'
+  padding-bottom: 5em
+a
+  color: darken($blue, 20%)
+.hidden
+  display: none !important
+input[type="text"], input[type="password"]
+  line-height: 1.5em
+  margin-top: 0.5em
+  margin-bottom: 0.5em
+  font-family: 'brevia-1'
+  font-size: 100%
+  background: lighten($white, 5%)
+  border: 2px solid darken($white, 10%)
+  padding: 0 0.25em
+  width: 100%
+  -webkit-box-sizing: border-box
+  &:focus
+    border: 2px solid $gold
+    background: lighten($white, 8%)
+    outline: none
+    +transition(all 0.2s linear)
+::-webkit-input-placeholder
+  color: darken($white, 20%)
+input[type="submit"], a.button
+  font-family: 'brevia-1'
+  // font-weight: 800
+  font-size: 100%
+  line-height: 2em
+  margin-top: 1em
+  padding: 0 1em
+  color: lighten($white, 5%)
+  background-image: -webkit-gradient(linear, left top, left bottom, from(lighten($black, 30%)), to(lighten($black, 20%)))
+  border: none
+  +round(0.5em)
+  +transition(all 0.2s linear)
+  display: inline-block
+  text-decoration: none
+  &:hover
+    background-image: -webkit-gradient(linear, left top, left bottom, from(lighten($black, 20%)), to(lighten($black, 30%)))
+  &.inline
+    line-height: 1.5em
+#header
+  background: lighten($black, 15%)
+  position: relative
+  .title
+    +row
+    h1
+      +column
+      +grid_12
+      text-shadow: lighten($black, 20%) 0 2px 2px
+      font-size: 200%
+      line-height: 2em
+      text-align: center
+      font-weight: 800
+  .user
+    position: absolute
+    right: 1.5em
+    bottom: 0
+    font-size: 80%
+    line-height: 2em
+    color: $white
+    a
+      color: $blue
+#navigation
+  background: $blue
+  line-height: 2em
+  margin-bottom: 0.5em
+  .menu
+    +row
+    li
+      list-style-type: none
+      a
+        +column
+        +grid_2
+        text-align: center
+        color: darken($blue, 20%)
+        text-shadow: lighten($blue, 10%) 0 1px 2px
+        font-weight: 700
+        margin-top: 5px
+        margin-bottom: 5px
+        text-decoration: none
+        +round(1em)
+        &:hover
+          -webkit-box-shadow: inset 1px 1px 2px darken($blue, 10%), inset -1px -1px 2px lighten($blue, 10%)
+      &.selected
+        a
+          background: darken($blue, 20%)
+          color: lighten($blue, 5%)
+          text-shadow: none
+          -webkit-box-shadow: inset 1px 1px 2px darken($blue, 25%)
+  
+#flash
+  +row
+  .flash
+    +column
+    +grid_12
+    .message
+      margin-top: .5em
+      margin-bottom: .5em
+      line-height: 2em
+      border: 2px solid darken($white, 20%)
+      padding: 0 0.5em
+      .close
+        float: right
+        color: darken($white, 30%)
+        cursor: pointer
+      img
+        vertical-align: middle
+        padding-right: 0.5em
+    &.notice .message
+      +color-box($green)
+    &.alert .message
+      +color-box($gold)
+    &.warning .message
+      +color-box(mix($red, $gold))
+    &.error .message
+      +color-box($red)
+
+.controls
+  .visibility
+    +row
+    .control
+      +column
+      +grid_2
+      .toggle
+        border: 2px solid $blue
+        line-height: 2em
+        font-size: 80%
+        +round(1em)
+        padding: 0 0.5em
+        text-align: center
+        +color-box($blue)
+        .text
+#page
+  padding-top: 0.5em
+  .odd
+    background: darken($white, 5%)
+  .project
+    padding-top: 0.5em
+    padding-bottom: 0.5em
+    .title-bar
+      +row
+      .name
+        +column
+        +clear_1('right')
+        +grid_3
+        line-height: 1.5em
+      .progress-text
+        +column
+        +grid_5
+        font-size: 80%
+        line-height: 1.875em
+        text-align: right
+    .main
+      +row
+      .hour-progress
+        .progress
+          +column
+          +grid_3
+          background: darken($white, 15%)
+          position: relative
+          +round(5px)
+          overflow: hidden
+          .wrapper
+            +round(5px)
+            overflow: hidden
+            .elapsed-bar
+              border-right: 1px solid $black
+              position: absolute
+            .bar
+              background: $green
+        .percent
+          +column
+          +grid_1
+          font-size: 80%
+          color: $green
+          text-align: left
+          line-height: 1.25em
+      .work-status
+        .remaining
+          +column
+          +grid_2
+          font-size: 80%
+          line-height: 1.25em
+        .scheduled
+          +column
+          +grid_2
+          font-size: 80%
+          line-height: 1.25em
+        .elapsed
+          +column
+          +grid_2
+          font-size: 80%
+          line-height: 1.25em
+    .sub-bar
+      +row
+      .hours
+        +column
+        +clear_1('right')
+        +grid_3
+        font-size: 80%
+        line-height: 1.5em
+        text-align: center
+        color: darken($white, 20%)
+        .hour
+          color: $green
+      .special
+        +column
+        +grid_8
+        font-size: 80%
+        line-height: 1.5em
+    &.over-budget
+      .main
+        .progress .wrapper .bar
+          background: $red
+        .percent
+          color: $red
+        .work-status .remaining
+          color: $red
+      .sub-bar
+        .hours .hour.completed
+          color: $red
+    
+    &.behind
+      .title-bar
+        .progress-text
+          color: $red
+      .main
+        .progress .wrapper .bar
+          background: $gold
+      .sub-bar .special .catch-up
+        color: $red
+    &.ended, &.unstarted
+      .title-bar, .main, .sub-bar
+        opacity: 0.4
+    &.overall
+      padding-bottom: 1.5em
+      .title-bar
+        font-weight: 700
+        font-size: 120%
+        .name
+          line-height: 2em
+        .progress-text
+          line-height: 2.5em
+      .main
+        .progress
+          line-height: 2em
+        .percent, .remaining, .scheduled, .elapsed
+          line-height: 2.5em
+      .sub-bar
+        font-size: 120%
+  .chart
+    +row
+    .title
+      +column
+      +grid_12
+      line-height: 1.5em
+      padding-bottom: 0.5em
+      font-weight: 700
+      font-size: 120%
+    .wrap
+      +column
+      +grid_12
+  form
+    .hint
+      font-weight: 400
+      color: $gold
+    .project-fields
+      +row
+      &.header
+        font-weight: 700
+      .name
+        +column
+        +grid_5
+        &.hint
+          line-height: 3em
+      .budget, .start, .end
+        +column
+        +grid_2
+      .info
+        +column
+        +grid_1
+        line-height: 2.5em
+        padding: 2px 0
+        background: $white
+        .close
+          visibility: hidden
+          color: darken($white, 30%)
+          cursor: pointer
+          font-weight: 800
+      &:hover .info .close
+        visibility: visible
+        &:hover
+          color: $gold
+      &.deleted
+        ::-webkit-input-placeholder
+          color: $white
+        input
+          opacity: 0.4
+        .info .close
+          visibility: visible
+    fieldset
+      padding-top: 1em
+      border: none
+      +row
+      .label
+        font-weight: 700
+        line-height: 1em
+        span.hint
+          padding-left: 3em
+      .data
+        input
+          margin-top: 0.25em
+
+  
+  #tab-controls
+    +row
+    border-bottom: 4px solid $gold
+    margin-bottom: 2em
+    margin-top: 1em
+    li.tab
+      +column
+      +grid_2
+      &:first-child
+        +clear_1(left)
+      div
+        line-height: 2em
+        text-align: center
+        background: darken($white, 10%)
+      &.selected
+        div
+          background: $gold
+  .tab-content
+    display: none
+    &.selected
+      display: block
+  .freckle_project
+    line-height: 2em
+    .added, .not_added
+      +row
+      .name
+        +column
+        +grid_5
+      .budget
+        +column
+        +grid_2
+      .controls
+        +column
+        +grid_2
+    .added .controls .button
+      margin: 0.5em 0
+    .not_added .controls .button
+      margin: 0.25em 0
+    &.inactive .name
+      font-style: italic
+

@@ -1,0 +1,16 @@
+= fields_for 'month[projects]', project, :index => nil do |p|
+  .project-fields
+    = p.hidden_field :freckle_id
+    = p.hidden_field :id
+    = p.hidden_field :billable
+    .name
+      = p.text_field :name
+    .budget
+      = p.text_field :budget
+    .start
+      = p.text_field :start_day, :value => ( p.object.start_day? ? format_date(p.object.start_day) : '' ), :placeholder => format_date(@user.current_month.start_day)
+    .end
+      = p.text_field :end_day, :value => ( p.object.end_day? ? format_date(p.object.end_day) : '' ), :placeholder =>format_date(@user.current_month.end_day)
+    .info
+      .close{ :title => 'Delete' } &#10005;
+      

@@ -11,65 +11,13 @@
           .text Hide unstarted
           .text.remove Show unstarted
 
-.project.overall{ :class => [ status_class(@month), cycle(:even, :odd, :name => :row) ] }
-  .title-bar
-    .name Total
-    .progress-text= progress_text(@month)
-  .main
-    .hour-progress
-      .progress
-        .wrapper
-          .elapsed-bar{ :style => "width: #{[@month.percent_elapsed, 100].min}%" } &nbsp;
-          .bar{ :style => "width: #{[@month.percent_completed, 100].min}%" } &nbsp;
-      .percent #{@month.percent_completed}%
-    .work-status
-      .remaining #{format_time(@month.time_remaining_per_day)}/day remaining
-      .scheduled #{format_time(@month.time_per_day)}/day originally
-      .elapsed #{format_time(@month.time_per_day_so_far)}/day so far
-  .sub-bar
-    .hours
-      %span.hour.completed= format_time @month.completed
-      \/
-      %span.hour.budget= format_time @month.budget
-    .special= special_text(@month)
-
+= render :partial => 'project', :locals => { :project => @month, :extra_class => 'overall' }
 - @month.projects.each do |project|
-  .project{ :class => [ status_class(project), cycle(:even, :odd, :name => :row) ] }
-    .title-bar
-      .name= project.name
-      .progress-text= progress_text(project)
-    .main
-      .hour-progress
-        .progress
-          .wrapper
-            - unless project.ended?
-              .elapsed-bar{ :style => "width: #{project.percent_elapsed}%" } &nbsp;
-            .bar{ :style => "width: #{[project.percent_completed, 100].min}%" } &nbsp;
-        .percent #{project.percent_completed}%
-      .work-status
-        .remaining
-          - if project.ended? and project.over_budget?
-            done
-          - elsif project.ended?
-            #{format_time(project.time_remaining_per_day)} remaining
-          - elsif project.over_budget?
-            #{format_time(project.over)} over budget
-          - else
-            #{format_time(project.time_remaining_per_day)}/day remaining
-        .scheduled #{format_time(project.time_per_day)}/day originally
-        .elapsed 
-          - if project.started?
-            #{format_time(project.time_per_day_so_far)}/day so far
-    .sub-bar
-      .hours
-        %span.hour.completed= format_time project.completed
-        \/
-        %span.hour.budget= format_time project.budget
-      .special= special_text(project)
-.project.other{ :class => cycle(:even, :odd, :name => :row) }
-  .title-bar
-    .name Other
-    .progress-text= format_time @month.other.completed
+  - if project.billable?
+    = render :partial => 'project', :locals => { :project => project }
+  - else
+    = render :partial => 'unbillable', :locals => { :project => project }
+= render :partial => 'unbillable', :locals => { :project => @month.other, :extra_class => 'other' }
 .project{ :class => cycle(:even, :odd, :name => :row) }
   .chart
     .title

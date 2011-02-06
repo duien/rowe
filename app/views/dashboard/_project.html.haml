@@ -1,0 +1,30 @@
+- unless defined? :extra_class then extra_class = nil end
+.project{ :class => [ status_class(project), cycle(:even, :odd, :name => :row), extra_class ] }
+  .title-bar
+    .name= project.respond_to?(:name) ? project.name : 'Total'
+    .progress-text= progress_text(project)
+  .main
+    .hour-progress
+      .progress
+        .wrapper
+          .elapsed-bar{ :style => "width: #{[project.percent_elapsed, 100].min}%" } &nbsp;
+          .bar{ :style => "width: #{[project.percent_completed, 100].min}%" } &nbsp;
+      .percent #{project.percent_completed}%
+    .work-status
+      .remaining
+        - if project.ended? and project.over_budget?
+          done
+        - elsif project.ended?
+          #{format_time(project.time_remaining_per_day)} remaining
+        - elsif project.over_budget?
+          #{format_time(project.over)} over budget
+        - else
+          #{format_time(project.time_remaining_per_day)}/day remaining
+      .scheduled #{format_time(project.time_per_day)}/day originally
+      .elapsed #{format_time(project.time_per_day_so_far)}/day so far
+  .sub-bar
+    .hours
+      %span.hour.completed= format_time project.completed
+      \/
+      %span.hour.budget= format_time project.budget
+    .special= special_text(project)

@@ -10,6 +10,7 @@ gem 'devise-mongo_mapper',
 gem 'haml'
 gem 'haml-rails'
 gem 'freckle'
+gem 'hassle'
 
 group :test do
   gem 'rspec'

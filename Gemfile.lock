@@ -56,6 +56,9 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
+    hassle (0.0.1)
+      haml
+      rack
     hpricot (0.8.3)
     i18n (0.5.0)
     jnunemaker-validatable (1.8.4)
@@ -138,6 +141,7 @@ DEPENDENCIES
   freckle
   haml
   haml-rails
+  hassle
   hpricot
   mongo
   mongo_mapper

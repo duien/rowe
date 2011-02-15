@@ -6,8 +6,10 @@ class ApplicationController < ActionController::Base
   protected
 
   def establish_freckle_connection
-    Freckle.establish_connection( :account => current_user.freckle_account,
-                                  :token => current_user.freckle_api_token
-                                  )
+    if current_user.present? and current_user.freckle_set_up?
+      Freckle.establish_connection( :account => current_user.freckle_account,
+                                    :token => current_user.freckle_api_token
+                                    )
+    end
   end
 end

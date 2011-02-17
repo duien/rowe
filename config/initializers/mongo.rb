@@ -1,11 +1,10 @@
-if ENV['MONGOHQ_URL']
-  MongoMapper.config = {RAILS_ENV => {'uri' => ENV['MONGOHQ_URL']}}
+if ENV['MONGOHQ_URL'].present?
+  MongoMapper.config = {Rails.env => {'uri' => ENV['MONGOHQ_URL']}}
 else
-  MongoMapper.config = {RAILS_ENV => {'uri' => 'mongodb://localhost'}}
-  MongoMapper.database = "rowe-#{Rails.env}"
+  MongoMapper.config = {Rails.env => {'uri' => "mongodb://localhost/rowe-#{Rails.env}" }}
 end
 
-MongoMapper.connect(RAILS_ENV)
+MongoMapper.connect(Rails.env)
 
 if defined?(PhusionPassenger)
    PhusionPassenger.on_event(:starting_worker_process) do |forked|

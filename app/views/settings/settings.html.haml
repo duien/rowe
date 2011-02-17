@@ -79,6 +79,8 @@
         = f.submit
 #projects-content.tab-content{ :class => @user.freckle_set_up? ? 'selected' : nil }
   = form_for @user.current_month, :url => update_settings_path do |f|
+    = f.label :budget
+    = f.text_field :budget, :value => f.object.attributes['budget'], :placeholder => f.object.budget
     = f.hidden_field :last_update, :value => nil
     .project-fields.header
       .name Project

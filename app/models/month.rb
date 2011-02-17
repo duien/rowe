@@ -7,6 +7,7 @@ class Month
   key :month, Date, :default => lambda{ Date.today.at_beginning_of_month }
   key :other, Project, :default => lambda{ Project.new(:name => 'Other') }
   key :last_update, Time
+  key :budget, Float
 
   belongs_to :user
   many :projects
@@ -15,16 +16,16 @@ class Month
     self.projects.select{ |p| p.billable }.map(&:completed).inject(&:+)
   end
 
-  def budget
-    num_weekdays * 6.4
-  end
-  
   def start_day
     self.month.at_beginning_of_month
   end
 
   def end_day
     self.month.at_end_of_month
+  end
+
+  def budget
+    super || num_weekdays * 6.4
   end
 
   def update_hours

@@ -1,16 +1,24 @@
-%h2 Sign in
+- content_for :body_class, 'floating'
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  %p
-    = f.label :email
-    %br/
-    = f.text_field :email
-  %p
-    = f.label :password
-    %br/
-    = f.password_field :password
+  %fieldset
+    %h2 Sign in
+  %fieldset.oneline
+    .name
+      = f.label :email
+    .medium-field
+      = f.text_field :email
+  %fieldset.oneline
+    .name
+      = f.label :password
+    .medium-field
+      = f.password_field :password
   - if devise_mapping.rememberable?
-    %p
-      = f.check_box :remember_me
-      = f.label :remember_me
-  %p= f.submit "Sign in"
+    %fieldset.oneline
+      .check-field
+        = f.check_box :remember_me
+      .name.left
+        = f.label :remember_me
+  %fieldset.oneline
+    .data
+      = f.submit "Sign in"
 = render :partial => "devise/shared/links"

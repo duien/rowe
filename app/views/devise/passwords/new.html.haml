@@ -1,9 +1,14 @@
-%h2 Forgot your password?
+- content_for :body_class, 'floating'
 = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+  %fieldset
+    %h2 Change your password
   = devise_error_messages!
-  %p
-    = f.label :email
-    %br/
-    = f.text_field :email
-  %p= f.submit "Send me reset password instructions"
+  %fieldset.oneline
+    .name
+      = f.label :email
+    .medium-field
+      = f.text_field :email
+  %fieldset.oineline
+    .data
+      = f.submit "Send me reset password instructions"
 = render :partial => "devise/shared/links"

@@ -1,17 +1,24 @@
-%h2 Sign up
+- content_for :body_class, 'floating'
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+  %fieldset
+    %h2 Sign up
   = devise_error_messages!
-  %p
-    = f.label :email
-    %br/
-    = f.text_field :email
-  %p
-    = f.label :password
-    %br/
-    = f.password_field :password
-  %p
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %p= f.submit "Sign up"
+  %fieldset.oneline
+    .name
+      = f.label :email
+    .medium-field
+      = f.text_field :email
+  %fieldset.oneline
+    .name
+      = f.label :password
+    .medium-field
+      = f.password_field :password
+  %fieldset.oneline
+    .name
+      = f.label :password_confirmation, 'Confirm'
+    .medium-field
+      = f.password_field :password_confirmation
+  %fieldset.oneline
+    .data
+      = f.submit "Sign up"
 = render :partial => "devise/shared/links"

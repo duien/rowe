@@ -39,7 +39,7 @@ class Month
                                   :token => user.freckle_api_token
                                   )
     project_mapping = self.projects.inject({}){ |h,p| h.update( p.freckle_id => p ) }
-    user = Freckle::User.by_login(self.user.freckle_user_name)
+    user = Freckle::User.by_email(self.user.freckle_email)
     projects.each{ |p| p.hours = {} }
     other.hours = {}
     entries = user.entries(:from => start_day.to_s, :to => end_day.to_s)

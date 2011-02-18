@@ -5,7 +5,7 @@ class User
   devise :registerable, :database_authenticatable, :recoverable, :rememberable
   
   key :name, String
-  key :freckle_user_name, String
+  key :freckle_email, String
   key :freckle_account, String
   key :freckle_api_token, String
 
@@ -16,7 +16,7 @@ class User
   end
 
   def freckle_set_up?
-    freckle_user_name? and freckle_account? and freckle_api_token?
+    freckle_email? and freckle_account? and freckle_api_token?
   end
 
 # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::

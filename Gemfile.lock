@@ -6,6 +6,14 @@ GIT
       devise (~> 1.1.0)
 
 GIT
+  remote: https://github.com/duien/freckle-client.git
+  revision: 4dc1bd679bc7b9f3075faddf170269ac076bd9f1
+  specs:
+    freckle (0.1.0)
+      json (= 1.4.6)
+      rest-client (= 1.6.1)
+
+GIT
   remote: https://github.com/koppen/hassle.git
   revision: 97512c65f4c6fa34a4d4e284c416e8e6ebecbd44
   specs:
@@ -55,9 +63,6 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    freckle (0.0.2)
-      json (= 1.4.6)
-      rest-client (= 1.6.1)
     haml (3.0.25)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -143,7 +148,7 @@ DEPENDENCIES
   bson_ext
   devise
   devise-mongo_mapper!
-  freckle
+  freckle!
   haml
   haml-rails
   hassle!

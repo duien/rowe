@@ -67,9 +67,10 @@
       %h2 Freckle
     %fieldset.oneline
       .name
-        = f.label :freckle_user_name, 'User Name'
+        = f.label :freckle_email, 'Email Address'
       .medium-field
-        = f.text_field :freckle_user_name
+        = f.text_field :freckle_email
+      .note The email address you use to log in to Freckle
     %fieldset.oneline
       .name
         = f.label :freckle_account,'Account'

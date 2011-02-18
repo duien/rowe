@@ -9,7 +9,7 @@ gem 'devise-mongo_mapper',
   :git    => 'git://github.com/collectiveidea/devise-mongo_mapper'
 gem 'haml'
 gem 'haml-rails'
-gem 'freckle'
+gem 'freckle', :git => 'https://github.com/duien/freckle-client.git'
 gem 'hassle', :git => 'https://github.com/koppen/hassle.git'
 
 group :test do

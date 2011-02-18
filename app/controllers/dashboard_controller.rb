@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   
+  before_filter :ensure_freckle_set_up,        :if     => :needs_to_set_up_freckle?
   respond_to :html
   
   def index

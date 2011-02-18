@@ -9,6 +9,13 @@ $green: #8f8b1d
 $red: #d15028
 $orange: mix($red, $gold)
 
+=light-font
+  font-family: 'St Ryde'
+  font-weight: normal
+=bold-font
+  font-family: 'MEgalopolis Extra'
+  font-weight: normal
+
 =color-box($color)
   border-color: $color
   background: mix(mix($color, $white), $white)
@@ -54,7 +61,7 @@ ul.ui-menu
 body
   background: $white
   color: $black
-  font-family: 'brevia-1'
+  +light-font
   padding-bottom: 5em
 a
   color: darken($blue, 20%)
@@ -64,7 +71,7 @@ input[type="text"], input[type="password"]
   line-height: 1.5em
   margin-top: 0.5em
   margin-bottom: 0.5em
-  font-family: 'brevia-1'
+  +light-font
   font-size: 100%
   background: lighten($white, 5%)
   border: 2px solid darken($white, 10%)
@@ -79,7 +86,7 @@ input[type="text"], input[type="password"]
 ::-webkit-input-placeholder
   color: darken($white, 20%)
 input[type="submit"], a.button
-  font-family: 'brevia-1'
+  +light-font
   // font-weight: 800
   font-size: 100%
   line-height: 2em
@@ -105,10 +112,9 @@ input[type="submit"], a.button
       +column
       +grid_12
       text-shadow: lighten($black, 20%) 0 2px 2px
-      font-size: 200%
       line-height: 2em
       text-align: center
-      font-weight: 800
+      +bold-font
   .user
     position: absolute
     right: 1.5em
@@ -132,9 +138,10 @@ input[type="submit"], a.button
         text-align: center
         color: darken($blue, 20%)
         text-shadow: lighten($blue, 10%) 0 1px 2px
-        font-weight: 700
+        +bold-font
         margin-top: 5px
         margin-bottom: 5px
+        padding-top: 3px
         text-decoration: none
         +round(1em)
         &:hover
@@ -293,7 +300,7 @@ input[type="submit"], a.button
     &.overall
       padding-bottom: 1.5em
       .title-bar
-        font-weight: 700
+        +bold-font
         font-size: 120%
         .name
           line-height: 2em
@@ -313,19 +320,20 @@ input[type="submit"], a.button
       +grid_12
       line-height: 1.5em
       padding-bottom: 0.5em
-      font-weight: 700
+      +bold-font
       font-size: 120%
     .wrap
       +column
       +grid_12
   form
     .hint
-      font-weight: 400
+      +light-font
       color: $gold
     .project-fields
       +row
       &.header
-        font-weight: 700
+        +bold-font
+        padding-top: 1.5em
       .name
         +column
         +grid_5
@@ -344,7 +352,7 @@ input[type="submit"], a.button
           visibility: hidden
           color: darken($white, 30%)
           cursor: pointer
-          font-weight: 800
+          +bold-font
       &:hover .info .close
         visibility: visible
         &:hover
@@ -361,15 +369,78 @@ input[type="submit"], a.button
       border: none
       +row
       .label
-        font-weight: 700
+        +column
+        +grid_12
+        +bold-font
         line-height: 1em
         span.hint
           padding-left: 3em
+        label
+          line-height: 1.5em
       .data
+        +column
+        +grid_12
         input
           margin-top: 0.25em
+      h2
+        +column
+        +grid_12
+        +bold-font
+        color: $gold
+        border-bottom: 4px solid $gold
+        margin-top: 1em
+        margin-bottom: 0.5em
+      &.oneline
+        .name
+          +column
+          +grid_2
+          +bold-font
+          line-height: 2.5em
+          text-align: right
+          margin-top: 3px
+          &.left
+            text-align: left
+        .check-field
+          +column
+          +grid_2
+          text-align: right
+          padding-top: 1em
+        .small-field
+          +column
+          +grid_2
+          &.right
+        .medium-field
+          +column
+          +grid_5
+        .large-field
+          +column
+          +grid_8
+        .note
+          +column
+          +grid_5
+          color: $gold
+          line-height: 2.5em
+          padding: 0.25em 0
 
   
+  .shared-links
+    +row
+    padding-top: 2em
+    .links
+      +column
+      +grid_12
+      ul
+        display: inline
+        list-style-type: none
+        padding-left: 1em
+        li
+          display: inline
+          &:before
+            content: ", "
+          &:first-child:before
+            content: ""
+          &:last-child:before
+            content: " or "
   #tab-controls
     +row
     border-bottom: 4px solid $gold
@@ -410,4 +481,21 @@ input[type="submit"], a.button
       margin: 0.25em 0
     &.inactive .name
       font-style: italic
-
+body.floating
+  background: lighten($black, 15%)
+  #page
+    +round(30px)
+    background: $white
+    width: 1000px
+    margin: 20px auto
+    padding: 30px 0
+    form fieldset:nth-of-type(1)
+      padding-top: 0
+      h2
+        margin-top: 0
+        border: none
+        text-align: right
+        color: lighten($black, 15%)
+        text-transform: uppercase
+        font-size: 250%
+        text-shadow: lighten($white, 5%) 0px 2px 2px, $black 0 -1px 0

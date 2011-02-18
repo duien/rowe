@@ -12,7 +12,8 @@ class SettingsController < ApplicationController
   def update
     success = if    params[:user].present?  then current_user.update_attributes(params[:user])
               elsif params[:month].present?
-                current_user.current_month.update_attributes(params[:month])
+                month = params[:month].inject({}){ |res, (k,v)| res.update( k => v.blank? ? nil : v ) }
+                current_user.current_month.update_attributes(month)
               end
     if success
       flash[:notice] = "Settings updated"

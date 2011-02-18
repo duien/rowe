@@ -9,6 +9,7 @@
         html.find('#month_projects__billable').val(ui.item.billable);
 
         $('.project-fields.message').addClass('remove');
+        $('.project-fields.header').removeClass('remove');
         $('#add-project-header').before(html);
         html.find('#month_projects__name').focus();
 
@@ -48,50 +49,60 @@
   %li.tab#freckle{ :class => @user.freckle_set_up? ? nil : 'selected' }
     %div account
   %li.tab#projects{ :class => @user.freckle_set_up? ? 'selected' : nil }
-    %div projects
+    %div your month
 
 #freckle-content.tab-content{ :class => @user.freckle_set_up? ? nil : 'selected' }
   = form_for @user, :url => update_settings_path do |f|
-    %fieldset
-      .label
+    %fieldset.oneline
+      .name
         = f.label :name, 'Your Name'
-      .data
+      .medium-field
         = f.text_field :name
+    %fieldset.oneline
+      .name
+        = f.label :email, 'Email Address'
+      .medium-field
+        = f.text_field :email
     %fieldset
       %h2 Freckle
-    %fieldset
-      .label
+    %fieldset.oneline
+      .name
         = f.label :freckle_user_name, 'User Name'
-      .data
+      .medium-field
         = f.text_field :freckle_user_name
-    %fieldset
-      .label
-        = f.label :freckle_account, raw('Account <span class="hint">the &lsquo;my-company&rsquo; in my-company.letsfreckle.com</span>')
-      .data
+    %fieldset.oneline
+      .name
+        = f.label :freckle_account,'Account'
+      .medium-field
         = f.text_field :freckle_account
-    %fieldset
-      .label
+      .note the &lsquo;my-company&rsquo; in my-company.letsfreckle.com
+    %fieldset.oneline
+      .name
         = f.label :freckle_api_token, 'API token'
-      .data
+      .medium-field
         = f.text_field :freckle_api_token
     %fieldset
       .submit
         = f.submit
 #projects-content.tab-content{ :class => @user.freckle_set_up? ? 'selected' : nil }
   = form_for @user.current_month, :url => update_settings_path do |f|
-    = f.label :budget
-    = f.text_field :budget, :value => f.object.attributes['budget'], :placeholder => f.object.budget
     = f.hidden_field :last_update, :value => nil
-    .project-fields.header
-      .name Project
+    %fieldset.oneline
+      .name Total Budget
+      .small-field= f.text_field :budget, :value => f.object.attributes['budget'], :placeholder => f.object.budget
+      .note leave blank for 6.4 hours per weekday
+    %fieldset
+      %h2 Projects
+    .project-fields.header{ :class => @user.current_month.projects.empty? ? 'remove' : nil }
+      .name Name
       .budget Budget
       .start Start
       .end End
+      = render :partial => 'project', :collection => @user.current_month.projects
     - if @user.current_month.projects.empty?
       .project-fields.message
         .name.hint Add your first project below!
     - else
-      = render :partial => 'project', :collection => @user.current_month.projects
     .project-fields#add-project-header
       .name
         %input#project-select{ :placeholder => 'Start typing a project name', :type => 'text' }

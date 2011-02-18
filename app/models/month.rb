@@ -8,6 +8,7 @@ class Month
   key :other, Project, :default => lambda{ Project.new(:name => 'Other') }
   key :last_update, Time
   key :budget, Float
+  key :num_weekdays, Float
 
   belongs_to :user
   many :projects
@@ -26,6 +27,10 @@ class Month
 
   def budget
     super || num_weekdays * 6.4
+  end
+
+  def num_weekdays
+    self.attributes['num_weekdays'] || super
   end
 
   def update_hours

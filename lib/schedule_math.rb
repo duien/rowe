@@ -56,7 +56,7 @@ module ScheduleMath
   end
 
   def num_weekdays_elapsed
-    end_at = self.ended? ? self.end_day : Date.today
+    end_at = self.ended? ? self.end_day : Date.today - 1
     Date.weekdays_in_range(self.start_day, end_at)
   end
 

@@ -35,16 +35,20 @@ module DashboardHelper
   def more_text(project)
     text = []
     text << "#{project.num_weekdays_remaining} days left" if project.started? and not project.ended?
-    if project.time_per_day - project.time_remaining_per_day < 0
+    if project.percent_completed - project.percent_elapsed < 0
       should_have_done = project.time_per_day * project.num_weekdays_elapsed
       to_catch_up = should_have_done - project.completed
-      text << %(<span class="catch-up">#{format_time to_catch_up} extra to get back on track</span>)
+      text << %(<span class="catch-up">#{format_time to_catch_up} by end of day</span>)
+    else
+      should_have_done = project.time_per_day * project.num_weekdays_elapsed
+      ahead = project.completed - should_have_done
+      text << %(<span class="ahead">#{format_time ahead} ahead</span>)
     end
     text.compact.join(', ') unless text.blank?
   end
 
   def progress_text(project)
-    time_difference = project.time_per_day - project.time_remaining_per_day
+    completed_difference = project.percent_completed - project.percent_elapsed
     if project.ended?
       if project.remaining > 0
         'You missed the deadline'
@@ -55,7 +59,7 @@ module DashboardHelper
       'Not yet started'
     elsif project.over_budget?
       'Over budget'
-    elsif time_difference >= 0 # we're ahead of schedule
+    elsif completed_difference >= 0 # we're ahead of schedule
       ''
     else # we're behind schedule
       "Watch out"

@@ -59,4 +59,18 @@ describe ScheduleMath do
       subject.should_not be_started
     end
   end
+
+  describe "ended?" do
+    it "returns true if the current time is after end_day" do
+      subject.stub(:end_day).and_return(Date.yesterday)
+
+      subject.should be_ended
+    end
+
+    it "returns false if the current time is before end_day" do
+      subject.stub(:end_day).and_return(Date.tomorrow)
+
+      subject.should_not be_ended
+    end
+  end
 end

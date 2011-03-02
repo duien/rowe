@@ -45,4 +45,18 @@ describe ScheduleMath do
       subject.should_not be_over_budget
     end
   end
+
+  describe "#started?" do
+    it "returns true if the current time is after start_day" do
+      subject.stub(:start_day).and_return(Date.yesterday)
+
+      subject.should be_started
+    end
+
+    it "returns false if the current time is before start_day" do
+      subject.stub(:start_day).and_return(Date.tomorrow)
+
+      subject.should_not be_started
+    end
+  end
 end

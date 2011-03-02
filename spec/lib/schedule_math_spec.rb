@@ -29,4 +29,20 @@ describe ScheduleMath do
       subject.over.should == 33
     end
   end
+
+  describe "#over_budget?" do
+    it "returns true if the project is over budget" do
+      subject.stub(:budget).and_return(50)
+      subject.stub(:completed).and_return(55)
+
+      subject.should be_over_budget
+    end
+
+    it "returns false if the project is under budget" do
+      subject.stub(:budget).and_return(50)
+      subject.stub(:completed).and_return(45)
+
+      subject.should_not be_over_budget
+    end
+  end
 end

@@ -13,5 +13,12 @@ describe Date do
         Date.weekdays_in_range(Date.today, nil)
       }.to raise_error(ArgumentError)
     end
+
+    it "returns the number of weekdays between two dates" do
+      start_day = Date.civil(2011, 03, 01)
+      end_day = Date.civil(2011, 03, 31)
+
+      Date.weekdays_in_range(start_day, end_day).should == 23
+    end
   end
 end

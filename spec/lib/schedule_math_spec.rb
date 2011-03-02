@@ -20,4 +20,13 @@ describe ScheduleMath do
       subject.remaining.should == 0
     end
   end
+
+  describe "#over" do
+    it "returns the number of completed hours over the budget" do
+      subject.stub(:budget).and_return(100)
+      subject.stub(:completed).and_return(133)
+
+      subject.over.should == 33
+    end
+  end
 end

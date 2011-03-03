@@ -122,4 +122,12 @@ describe ScheduleMath do
       subject.percent_completed.should == 50
     end
   end
+
+  describe "#time_per_day" do
+    it "returns the number of hours per day that must be worked on average" do
+      subject.stub(:budget).and_return(184)
+
+      subject.time_per_day.should == 8.0
+    end
+  end
 end

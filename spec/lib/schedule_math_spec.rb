@@ -81,5 +81,30 @@ describe ScheduleMath do
 
       subject.should_not be_ended
     end
+
+    it "returns false if the current time is exactly the end_day" do
+      Date.stub(:today).and_return(subject.end_day)
+
+      subject.should_not be_ended
+    end
+  end
+
+  describe "behind?" do
+    before do
+      # 8 hrs/day
+      subject.stub(:budget).and_return(184)
+    end
+
+    it "returns true if the project is behind schedule" do
+      subject.stub(:completed).and_return(31)
+
+      subject.should be_behind
+    end
+
+    it "returns false if the project is not behind schedule" do
+      subject.stub(:completed).and_return(32)
+
+      subject.should_not be_behind
+    end
   end
 end

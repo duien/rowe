@@ -138,5 +138,13 @@ describe ScheduleMath do
 
       subject.time_remaining_per_day.should == 7.5
     end
+
+    it "returns the remaining hours if the number of remaining weekdays is 0" do
+      subject.stub(:budget).and_return(200)
+      subject.stub(:completed).and_return(190)
+      Date.stub(:today).and_return(subject.end_day + 1.day)
+
+      subject.time_remaining_per_day.should == 10.0
+    end
   end
 end

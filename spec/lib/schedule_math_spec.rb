@@ -130,4 +130,13 @@ describe ScheduleMath do
       subject.time_per_day.should == 8.0
     end
   end
+
+  describe "#time_remaining_per_day" do
+    it "returns the number of hours that must be worked in the remaining days" do
+      subject.stub(:budget).and_return(184)
+      subject.stub(:completed).and_return(41.5)
+
+      subject.time_remaining_per_day.should == 7.5
+    end
+  end
 end

@@ -147,4 +147,18 @@ describe ScheduleMath do
       subject.time_remaining_per_day.should == 10.0
     end
   end
+
+  describe "#time_per_day_so_far" do
+    it "returns 0 if the project has not started" do
+      Date.stub(:today).and_return(subject.start_day - 1.day)
+
+      subject.time_per_day_so_far.should == 0.0
+    end
+
+    it "returns the number of hours worked on average per day so far" do
+      subject.stub(:completed).and_return(40.0)
+
+      subject.time_per_day_so_far.should == 10.0
+    end
+  end
 end

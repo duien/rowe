@@ -69,7 +69,7 @@ describe ScheduleMath do
     end
   end
 
-  describe "ended?" do
+  describe "#ended?" do
     it "returns true if the current time is after end_day" do
       Date.stub(:today).and_return(subject.end_day + 1.day)
 
@@ -89,7 +89,7 @@ describe ScheduleMath do
     end
   end
 
-  describe "behind?" do
+  describe "#behind?" do
     before do
       # 8 hrs/day
       subject.stub(:budget).and_return(184)
@@ -105,6 +105,21 @@ describe ScheduleMath do
       subject.stub(:completed).and_return(32)
 
       subject.should_not be_behind
+    end
+  end
+
+  describe "#percent_completed" do
+    it "returns 100% if the budget is 0 hours" do
+      subject.stub(:budget).and_return(0)
+
+      subject.percent_completed.should == 100
+    end
+
+    it "returns the percent completed" do
+      subject.stub(:budget).and_return(200)
+      subject.stub(:completed).and_return(100)
+
+      subject.percent_completed.should == 50
     end
   end
 end

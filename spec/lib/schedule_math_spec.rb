@@ -123,6 +123,30 @@ describe ScheduleMath do
     end
   end
 
+  describe "#num_weekdays_remaining" do
+    it "should return the total number of days in the month if the project has not yet started" do
+      Date.stub(:today).and_return(subject.start_day - 1.week)
+
+      subject.num_weekdays_remaining.should == 23
+    end
+
+    it "should return the number of weekdays remaining (including today)" do
+      subject.num_weekdays_remaining.should == 19
+    end
+  end
+
+  describe "#num_weekdays_elapsed" do
+    it "should return the total number of days in the month if the project has already ended" do
+      Date.stub(:today).and_return(subject.end_day + 1.week)
+
+      subject.num_weekdays_elapsed.should == 23
+    end
+
+    it "should return the number of weekdays elapsed (not including today)" do
+      subject.num_weekdays_elapsed.should == 4
+    end
+  end
+
   describe "#time_per_day" do
     it "returns the number of hours per day that must be worked on average" do
       subject.stub(:budget).and_return(184)

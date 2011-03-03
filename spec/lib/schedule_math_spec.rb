@@ -5,6 +5,15 @@ describe ScheduleMath do
     Class.new { include ScheduleMath }.new
   end
 
+  # Reasonable defaults that can be overridden by individual tests or blocks
+  # Project that runs from March 1 - March 31 2011
+  # Current date is March 7 (fifth weekday)
+  before do
+    subject.stub(:start_day).and_return(Date.civil(2011, 03, 01))
+    subject.stub(:end_day).and_return(Date.civil(2011, 03, 31))
+    Date.stub(:today).and_return(Date.civil(2011, 03, 07)) # fifth weekday
+  end
+
   describe "#remaining" do
     it "returns the difference between the number of hours completed and the budget" do
       subject.stub(:budget).and_return(100)
@@ -48,13 +57,13 @@ describe ScheduleMath do
 
   describe "#started?" do
     it "returns true if the current time is after start_day" do
-      subject.stub(:start_day).and_return(Date.yesterday)
+      Date.stub(:today).and_return(subject.start_day + 1.day)
 
       subject.should be_started
     end
 
     it "returns false if the current time is before start_day" do
-      subject.stub(:start_day).and_return(Date.tomorrow)
+      Date.stub(:today).and_return(subject.start_day - 1.day)
 
       subject.should_not be_started
     end
@@ -62,13 +71,13 @@ describe ScheduleMath do
 
   describe "ended?" do
     it "returns true if the current time is after end_day" do
-      subject.stub(:end_day).and_return(Date.yesterday)
+      Date.stub(:today).and_return(subject.end_day + 1.day)
 
       subject.should be_ended
     end
 
     it "returns false if the current time is before end_day" do
-      subject.stub(:end_day).and_return(Date.tomorrow)
+      Date.stub(:today).and_return(subject.end_day - 1.day)
 
       subject.should_not be_ended
     end

@@ -145,6 +145,12 @@ describe ScheduleMath do
     it "should return the number of weekdays elapsed (not including today)" do
       subject.num_weekdays_elapsed.should == 4
     end
+
+    it "should return the number of weekdays elapsed on weekends" do
+      Date.stub(:today).and_return(Date.civil(2011, 03, 05)) # first Saturday
+
+      subject.num_weekdays_elapsed.should == 4
+    end
   end
 
   describe "#time_per_day" do

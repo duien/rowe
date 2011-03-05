@@ -5,4 +5,9 @@ class Date
       day.wday == 0 || day.wday == 6 ? count : count + 1 # sunday or saturday
     end
   end
+
+  def weekday?
+    wday == 0 || wday == 6 ? false : true
+  end
+
 end

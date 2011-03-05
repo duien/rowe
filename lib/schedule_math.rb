@@ -57,7 +57,8 @@ module ScheduleMath
 
   def num_weekdays_elapsed
     end_at = self.ended? ? self.end_day + 1 : Date.today
-    Date.weekdays_in_range(self.start_day, end_at) - 1
+    subtract_if_weekday = Date.today.weekday? ? 1 : 0
+    Date.weekdays_in_range(self.start_day, end_at) - subtract_if_weekday
   end
 
   def time_per_day

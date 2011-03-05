@@ -8,7 +8,7 @@ class Month
   key :other, Project, :default => lambda{ Project.new(:name => 'Other') }
   key :last_update, Time
   key :budget, Float
-  key :num_weekdays, Float
+  key :num_weekdays, Integer
 
   belongs_to :user
   many :projects

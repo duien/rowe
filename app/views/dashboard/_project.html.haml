@@ -7,7 +7,7 @@
     .hour-progress
       .progress
         .wrapper
-          .elapsed-bar{ :style => "width: #{[project.percent_elapsed, 100].min}%" } &nbsp;
+          .elapsed-bar{ :style => "width: #{[project.percent_elapsed(:include_today => true), 100].min}%" } &nbsp;
           .bar{ :style => "width: #{[project.percent_completed, 100].min}%" } &nbsp;
       .percent #{project.percent_completed}%
     .work-status

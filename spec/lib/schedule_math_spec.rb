@@ -123,6 +123,16 @@ describe ScheduleMath do
     end
   end
 
+  describe "#percent_elapsed" do
+    it "does not include today by default" do
+      subject.percent_elapsed.should == 17
+    end
+
+    it "includes today when :include_today is true" do
+      subject.percent_elapsed(:include_today => true).should == 21
+    end
+  end
+
   describe "#num_weekdays_remaining" do
     it "should return the total number of days in the month if the project has not yet started" do
       Date.stub(:today).and_return(subject.start_day - 1.week)

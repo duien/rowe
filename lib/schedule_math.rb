@@ -42,8 +42,12 @@ module ScheduleMath
     ((self.completed.to_f / self.budget) * 100).to_i
   end
 
-  def percent_elapsed
-    ((self.num_weekdays_elapsed.to_f / self.num_weekdays) * 100).to_i
+  def percent_elapsed( options = {} )
+    options.reverse_merge( :include_today => false )
+    days_elapsed = self.num_weekdays_elapsed
+    days_elapsed += 1 if options[:include_today] and Date.today.weekday?
+
+    ((days_elapsed.to_f / self.num_weekdays) * 100).to_i
   end
 
   def num_weekdays

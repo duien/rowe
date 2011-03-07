@@ -37,7 +37,7 @@ module DashboardHelper
     text << "#{project.num_weekdays_remaining} days left" if project.started? and not project.ended?
     should_have_done = project.time_per_day * ( project.num_weekdays_elapsed ) 
     should_have_done += project.time_per_day if !project.ended? and Date.today.weekday? # include today for this calculation
-    if project.percent_completed - project.percent_elapsed < 0
+    if project.percent_completed - project.percent_elapsed(:include_today => true) < 0
       to_catch_up = should_have_done - project.completed
       text << %(<span class="catch-up">#{format_time to_catch_up} by end of day</span>)
     else

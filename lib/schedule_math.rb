@@ -74,7 +74,7 @@ module ScheduleMath
     if self.num_weekdays_remaining <= 0
       self.remaining
     else
-      self.remaining / self.num_weekdays_remaining
+      self.remaining / ( self.num_weekdays_remaining - ( Date.today.weekday? ? 1 : 0 ) )
     end
   end
 
@@ -82,7 +82,7 @@ module ScheduleMath
     if self.num_weekdays_elapsed <= 0
       0
     else
-      self.completed / self.num_weekdays_elapsed
+      self.completed / ( self.num_weekdays_elapsed + ( Date.today.weekday? ? 1 : 0 ) )
     end
   end
   

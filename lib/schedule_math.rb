@@ -71,7 +71,7 @@ module ScheduleMath
   end
 
   def time_remaining_per_day
-    if self.num_weekdays_remaining <= 0
+    if self.num_weekdays_remaining <= 1
       self.remaining
     else
       self.remaining / ( self.num_weekdays_remaining - ( Date.today.weekday? ? 1 : 0 ) )

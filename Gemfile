@@ -21,7 +21,8 @@ group :development do
   gem 'hpricot'
   gem 'rails3-generators'
   gem 'ruby_parser'
-  gem 'ruby-debug'
+  gem 'ruby-debug', :platform => :ruby_18
+  gem 'ruby-debug19', :platform => :ruby_19
 end
 
 

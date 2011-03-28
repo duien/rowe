@@ -35,13 +35,15 @@ module DashboardHelper
   def more_text(project)
     text = []
     text << "#{project.num_weekdays_remaining} days left" if project.started? and not project.ended?
+
     should_have_done = project.time_per_day * ( project.num_weekdays_elapsed ) 
     should_have_done += project.time_per_day if !project.ended? and Date.today.weekday? # include today for this calculation
-    if project.percent_completed - project.percent_elapsed(:include_today => true) < 0
-      to_catch_up = should_have_done - project.completed
+    to_catch_up = should_have_done - project.completed
+
+    if to_catch_up > 0
       text << %(<span class="catch-up">#{format_time to_catch_up} by end of day</span>)
     else
-      ahead = project.completed - should_have_done
+      ahead = -to_catch_up
       text << %(<span class="ahead">#{format_time ahead} ahead</span>)
     end
     text.compact.join(', ') unless text.blank?

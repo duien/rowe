@@ -15,6 +15,8 @@ gem 'hassle', :git => 'https://github.com/koppen/hassle.git'
 group :test do
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'timecop'
 end
 
 group :development do

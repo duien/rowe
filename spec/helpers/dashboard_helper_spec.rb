@@ -10,6 +10,11 @@ describe DashboardHelper do
       let(:project) { Factory(:needs_catchup_project) }
       it { should =~ /1:15 by end of day/ }
     end
+
+    context 'ahead of schedule' do
+      let(:project) { Factory(:ahead_project) }
+      it { should =~ /0:45 ahead/ }
+    end
   end
 end
 

@@ -1,0 +1,175 @@
+@import "/fonts/stylesheet.css"
+
+// Color Scheme
+$gold: #caa91e
+$white: #e6e3b2
+$blue: #76b8ab
+$black: #100f0e
+$green: #8f8b1d
+$red: #d15028
+$orange: mix($red, $gold)
+
+=color-box($color)
+  border-color: $color
+  background: mix(mix($color, $white), $white)
+  .close
+    color: $color
+
+
+ul.ui-menu
+  background: lighten($white, 5%)
+  border-color: darken($white, 10%)
+  li.ui-menu-item
+    a.ui-corner-all
+      color: black
+      &.ui-state-hover
+        background: darken($white, 10%)
+
+body
+  background: $white
+  color: $black
+a
+  color: darken($blue, 20%)
+input[type="text"], input[type="password"]
+  background: lighten($white, 5%)
+  border-color: darken($white, 10%)
+  &:focus
+    border-color: $gold
+    background: lighten($white, 8%)
+::-webkit-input-placeholder
+  color: darken($white, 20%)
+input[type="submit"], a.button
+  color: lighten($white, 5%)
+  background-image: -webkit-gradient(linear, left top, left bottom, from(lighten($black, 30%)), to(lighten($black, 20%)))
+  &:hover
+    background-image: -webkit-gradient(linear, left top, left bottom, from(lighten($black, 20%)), to(lighten($black, 30%)))
+#header
+  background: lighten($black, 15%)
+  .title
+    h1
+      text-shadow: lighten($black, 20%) 0 2px 2px
+  .user
+    color: $white
+    a
+      color: $blue
+#navigation
+  background: $blue
+  .menu
+    li
+      a
+        color: darken($blue, 20%)
+        text-shadow: lighten($blue, 10%) 0 1px 2px
+        &:hover
+          -webkit-box-shadow: inset 1px 1px 2px darken($blue, 10%), inset -1px -1px 2px lighten($blue, 10%)
+      &.selected
+        a
+          background: darken($blue, 20%)
+          color: lighten($blue, 5%)
+          text-shadow: none
+          -webkit-box-shadow: inset 1px 1px 2px darken($blue, 25%)
+  
+#flash
+  .flash
+    .message
+      border-color: darken($white, 20%)
+      .close
+        color: darken($white, 30%)
+      img
+    &.notice .message
+      +color-box($green)
+    &.alert .message
+      +color-box($gold)
+    &.warning .message
+      +color-box(mix($red, $gold))
+    &.error .message
+      +color-box($red)
+
+.controls
+  .visibility
+    .control
+      .toggle
+        border-color: $blue
+        +color-box($blue)
+#page
+  .odd
+    background: darken($white, 5%)
+  .project
+    .main
+      .hour-progress
+        .progress
+          background: darken($white, 15%)
+          .wrapper
+            .elapsed-bar
+              border-right-color: $black
+            .bar
+              background: $green
+        .percent
+          color: $green
+    .sub-bar
+      .hours
+        color: darken($white, 20%)
+        .hour
+          color: $green
+      .special
+        .ahead
+          color: $green
+    &.over-budget
+      .main
+        .progress .wrapper .bar
+          background: $red
+        .percent
+          color: $red
+        .work-status .remaining
+          color: $red
+      .sub-bar
+        .hours .hour.completed
+          color: $red
+    
+    &.behind
+      .title-bar
+        .progress-text
+          color: $red
+      .main
+        .progress .wrapper .bar
+          background: mix($gold, $orange)
+      .sub-bar .special .catch-up
+        color: $red
+  form
+    .hint
+      color: $gold
+    .project-fields
+      &.header
+      .info
+        background: $white
+        .close
+          color: darken($white, 30%)
+      &:hover .info .close
+        &:hover
+          color: $gold
+      &.deleted
+        ::-webkit-input-placeholder
+          color: $white
+    fieldset
+      h2
+        color: $gold
+        border-bottom-color: $gold
+      &.oneline
+        .note
+          color: $gold
+  
+  #tab-controls
+    border-bottom-color: $gold
+    li.tab
+      div
+        background: darken($white, 10%)
+      &.selected
+        div
+          background: $gold
+body.floating
+  background: lighten($black, 15%)
+  #page
+    background: $white
+    form fieldset:nth-of-type(1)
+      h2
+        color: lighten($black, 15%)
+        text-shadow: lighten($white, 5%) 0px 2px 2px, $black 0 -1px 0

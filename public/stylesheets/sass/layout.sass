@@ -1,0 +1,385 @@
+@import grid
+@import round
+// Color Scheme
+
+=transition($stuff)
+  -webkit-transition: $stuff
+  -moz-transition: $stuff
+  -o-transition: $stuff
+  transition: $stuff
+  
+
+/* CLEAR DEFAULT LAYOUT, GENERIC STYLES */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,tr,th,td
+  margin: 0
+  padding: 0
+
+.remove
+  display: none !important
+.hide
+  visibility: hidden
+.hidden
+  display: none !important
+
+/* JQUERY UI OVERRIDES */
+ul.ui-menu
+  border-width: 2px
+  border-style: solid
+  list-style-type: none
+  width: 376px
+  border-top: none
+  li.ui-menu-item
+    a.ui-corner-all
+      display: block
+      padding: 0.5em
+      color: black
+    &:nth-child(n+6)
+      display: none
+
+/* BEGIN STYLES */
+body
+  padding-bottom: 5em
+input[type="text"], input[type="password"]
+  line-height: 1.5em
+  margin-top: 0.5em
+  margin-bottom: 0.5em
+  font-size: 100%
+  border-width: 2px
+  border-style: solid
+  padding: 0 0.25em
+  width: 100%
+  -webkit-box-sizing: border-box
+  &:focus
+    outline: none
+    +transition(all 0.2s linear)
+input[type="submit"], a.button
+  font-size: 100%
+  line-height: 2em
+  margin-top: 1em
+  padding: 0 1em
+  border: none
+  +round(0.5em)
+  +transition(all 0.2s linear)
+  display: inline-block
+  text-decoration: none
+  &.inline
+    line-height: 1.5em
+#header
+  position: relative
+  .title
+    +row
+    h1
+      +column
+      +grid_12
+      line-height: 2em
+      text-align: center
+  .user
+    position: absolute
+    right: 1.5em
+    bottom: 0
+    font-size: 80%
+    line-height: 2em
+#navigation
+  line-height: 2em
+  margin-bottom: 0.5em
+  .menu
+    +row
+    li
+      list-style-type: none
+      a
+        +column
+        +grid_2
+        text-align: center
+        margin-top: 5px
+        margin-bottom: 5px
+        padding-top: 3px
+        text-decoration: none
+        +round(1em)
+  
+#flash
+  +row
+  .flash
+    +column
+    +grid_12
+    .message
+      margin-top: .5em
+      margin-bottom: .5em
+      line-height: 2em
+      border-width: 2px
+      border-style: solid
+      padding: 0 0.5em
+      .close
+        float: right
+        cursor: pointer
+      img
+        vertical-align: middle
+        padding-right: 0.5em
+
+.controls
+  .visibility
+    +row
+    .control
+      +column
+      +grid_2
+      .toggle
+        border-width: 2px
+        border-style: solid
+        line-height: 2em
+        font-size: 80%
+        +round(1em)
+        padding: 0 0.5em
+        text-align: center
+
+#page
+  padding-top: 0.5em
+  .project
+    padding-top: 0.5em
+    padding-bottom: 0.5em
+    .title-bar
+      +row
+      .name
+        +column
+        +clear_1('right')
+        +grid_3
+        line-height: 1.5em
+      .progress-text
+        +column
+        +grid_5
+        font-size: 80%
+        line-height: 1.875em
+        text-align: right
+    .main
+      +row
+      .hour-progress
+        .progress
+          +column
+          +grid_3
+          position: relative
+          +round(5px)
+          overflow: hidden
+          .wrapper
+            +round(5px)
+            overflow: hidden
+            .elapsed-bar
+              border-right-width: 1px
+              border-right-style: solid
+              position: absolute
+        .percent
+          +column
+          +grid_1
+          font-size: 80%
+          text-align: left
+          line-height: 1.25em
+      .work-status
+        .remaining
+          +column
+          +grid_2
+          font-size: 80%
+          line-height: 1.25em
+        .scheduled
+          +column
+          +grid_2
+          font-size: 80%
+          line-height: 1.25em
+        .elapsed
+          +column
+          +grid_2
+          font-size: 80%
+          line-height: 1.25em
+    .sub-bar
+      +row
+      .hours
+        +column
+        +clear_1('right')
+        +grid_3
+        font-size: 80%
+        line-height: 1.5em
+        text-align: center
+      .special
+        +column
+        +grid_8
+        font-size: 80%
+        line-height: 1.5em
+    
+    &.ended, &.unstarted
+      .title-bar, .main, .sub-bar
+        opacity: 0.4
+    &.overall
+      padding-bottom: 1.5em
+      .title-bar
+        font-size: 120%
+        .name
+          line-height: 2em
+        .progress-text
+          line-height: 2.5em
+      .main
+        .progress
+          line-height: 2em
+        .percent, .remaining, .scheduled, .elapsed
+          line-height: 2.5em
+      .sub-bar
+        font-size: 120%
+  .chart
+    +row
+    .title
+      +column
+      +grid_12
+      line-height: 1.5em
+      padding-bottom: 0.5em
+      font-size: 120%
+    .wrap
+      +column
+      +grid_12
+  form
+    .project-fields
+      +row
+      &.header
+        padding-top: 1.5em
+      .name
+        +column
+        +grid_5
+        &.hint
+          line-height: 3em
+      .budget, .start, .end
+        +column
+        +grid_2
+      .info
+        +column
+        +grid_1
+        line-height: 2.5em
+        padding: 2px 0
+        .close
+          visibility: hidden
+          cursor: pointer
+      &:hover .info .close
+        visibility: visible
+      &.deleted
+        input
+          opacity: 0.4
+        .info .close
+          visibility: visible
+    fieldset
+      padding-top: 1em
+      border: none
+      +row
+      .label
+        +column
+        +grid_12
+        line-height: 1em
+        span.hint
+          padding-left: 3em
+        label
+          line-height: 1.5em
+      .data
+        +column
+        +grid_12
+        input
+          margin-top: 0.25em
+      h2
+        +column
+        +grid_12
+        border-bottom-width: 4px
+        border-bottom-style: solid
+        margin-top: 1em
+        margin-bottom: 0.5em
+      &.oneline
+        .name
+          +column
+          +grid_2
+          line-height: 2.5em
+          text-align: right
+          margin-top: 3px
+          &.left
+            text-align: left
+        .check-field
+          +column
+          +grid_2
+          text-align: right
+          padding-top: 1em
+        .small-field
+          +column
+          +grid_2
+          &.right
+        .medium-field
+          +column
+          +grid_5
+        .large-field
+          +column
+          +grid_8
+        .note
+          +column
+          +grid_5
+          line-height: 2.5em
+          padding: 0.25em 0
+
+  
+  .shared-links
+    +row
+    padding-top: 2em
+    .links
+      +column
+      +grid_12
+      ul
+        display: inline
+        list-style-type: none
+        padding-left: 1em
+        li
+          display: inline
+          &:before
+            content: ", "
+          &:first-child:before
+            content: ""
+          &:last-child:before
+            content: " or "
+  #tab-controls
+    +row
+    border-bottom-width: 4px
+    border-bottom-style: solid
+    margin-bottom: 2em
+    margin-top: 1em
+    li.tab
+      +column
+      +grid_2
+      &:first-child
+        +clear_1(left)
+      div
+        line-height: 2em
+        text-align: center
+  .tab-content
+    display: none
+    &.selected
+      display: block
+  .freckle_project
+    line-height: 2em
+    .added, .not_added
+      +row
+      .name
+        +column
+        +grid_5
+      .budget
+        +column
+        +grid_2
+      .controls
+        +column
+        +grid_2
+    .added .controls .button
+      margin: 0.5em 0
+    .not_added .controls .button
+      margin: 0.25em 0
+    &.inactive .name
+      font-style: italic
+body.floating
+  #page
+    +round(30px)
+    width: 1000px
+    margin: 20px auto
+    padding: 30px 0
+    form fieldset:nth-of-type(1)
+      padding-top: 0
+      h2
+        margin-top: 0
+        border: none
+        text-align: right
+        text-transform: uppercase
+        font-size: 250%
+

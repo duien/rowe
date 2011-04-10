@@ -1,0 +1,60 @@
+@import "/fonts/stylesheet.css"
+
+// Color Scheme
+$gold: #caa91e
+$white: #e6e3b2
+$blue: #76b8ab
+$black: #100f0e
+$green: #8f8b1d
+$red: #d15028
+$orange: mix($red, $gold)
+
+=light-font
+  font-family: 'St Ryde'
+  font-weight: normal
+=bold-font
+  font-family: 'MEgalopolis Extra'
+  font-weight: normal
+
+body
+  +light-font
+input[type="text"], input[type="password"]
+  +light-font
+input[type="submit"], a.button
+  +light-font
+#header
+  .title
+    h1
+      +bold-font
+#navigation
+  .menu
+    li
+      a
+        +bold-font
+  
+#page
+  .project
+    &.overall
+      .title-bar
+        +bold-font
+  .chart
+    .title
+      +bold-font
+  form
+    .hint
+      +light-font
+    .project-fields
+      &.header
+        +bold-font
+      .info
+        .close
+          +bold-font
+    fieldset
+      .label
+        +bold-font
+      h2
+        +bold-font
+      &.oneline
+        .name
+          +bold-font
+  

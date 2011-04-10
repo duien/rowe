@@ -13,6 +13,7 @@
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,tr,th,td
   margin: 0
   padding: 0
+  font-weight: normal
 
 .remove
   display: none !important
@@ -76,12 +77,12 @@ input[type="submit"], a.button
   .user
     position: absolute
     right: 1.5em
-    bottom: 0
+    // bottom: 0
+    top: 0.5em
     font-size: 80%
     line-height: 2em
 #navigation
   line-height: 2em
-  margin-bottom: 0.5em
   .menu
     +row
     li
@@ -90,11 +91,26 @@ input[type="submit"], a.button
         +column
         +grid_2
         text-align: center
-        margin-top: 5px
-        margin-bottom: 5px
-        padding-top: 3px
+        // margin-top: 5px
+        // margin-bottom: 5px
+        padding-top: 5px
+        padding-bottom: 5px
         text-decoration: none
-        +round(1em)
+        // +round(1em)
+#subnavigation
+  border-top-width: 0.5em
+  border-top-style: solid
+  // height: 2em
+  ul
+    +row
+    li.tab
+      +column
+      +grid_2
+      &:first-child
+        +clear_1(left)
+      div
+        line-height: 2em
+        text-align: center
   
 #flash
   +row
@@ -133,8 +149,8 @@ input[type="submit"], a.button
 #page
   padding-top: 0.5em
   .project
-    padding-top: 0.5em
-    padding-bottom: 0.5em
+    padding-top: 1em
+    padding-bottom: 1em
     .title-bar
       +row
       .name
@@ -255,11 +271,10 @@ input[type="submit"], a.button
         visibility: visible
       &.deleted
         input
-          opacity: 0.4
+          // opacity: 0.6
         .info .close
           visibility: visible
     fieldset
-      padding-top: 1em
       border: none
       +row
       .label
@@ -281,7 +296,7 @@ input[type="submit"], a.button
         border-bottom-width: 4px
         border-bottom-style: solid
         margin-top: 1em
-        margin-bottom: 0.5em
+        margin-bottom: 1em
       &.oneline
         .name
           +column
@@ -331,22 +346,9 @@ input[type="submit"], a.button
             content: ""
           &:last-child:before
             content: " or "
-  #tab-controls
-    +row
-    border-bottom-width: 4px
-    border-bottom-style: solid
-    margin-bottom: 2em
-    margin-top: 1em
-    li.tab
-      +column
-      +grid_2
-      &:first-child
-        +clear_1(left)
-      div
-        line-height: 2em
-        text-align: center
   .tab-content
     display: none
+    padding-top: 1em
     &.selected
       display: block
   .freckle_project
@@ -370,7 +372,7 @@ input[type="submit"], a.button
       font-style: italic
 body.floating
   #page
-    +round(30px)
+    // +round(30px)
     width: 1000px
     margin: 20px auto
     padding: 30px 0

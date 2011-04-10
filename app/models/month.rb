@@ -2,7 +2,11 @@ class Month
   include MongoMapper::Document         
   include ScheduleMath
 
-  GRAPH_COLORS = %w(caa91e 3C7368 cd7c23 8f8b1d d9d58b)
+  GRAPH_COLORS = %w(b58900 cb4b16 dc322f d33682 6c71c4 268bd2 2aa198 859900)#.map{ |c| [c, "#{c}7f"] }.flatten
+  OTHER_COLOR  = '073642' # base02
+  AXIS_COLOR   = 'eee8d5' # base2
+  LABEL_COLOR  = '93a1a1' # base1
+  TARGET_COLOR = '657b83' # base00
 
   key :month, Date, :default => lambda{ Date.today.at_beginning_of_month }
   key :other, Project, :default => lambda{ Project.new(:name => 'Other') }
@@ -71,17 +75,17 @@ class Month
       :chds => '0,12',
       # Chart markers : horizontal, color, series, which points (or placement), width, z-index
       :chm  => [
-        'h,8f8b1d,0,0,1,-0.5',
-        (1..12).map{ |i| "h,d6d182,0,#{i/12.0},1,-0.5" }
+        "h,#{LABEL_COLOR},0,0,1,-0.5",
+        (0..12).map{ |i| "h,#{AXIS_COLOR},0,#{i/12.0},1,-0.5" }
       ].flatten.join('|'),
       # Chart margin
       :chma => '10,10,10,10',
       # Chart bar width: automatic
       :chbh => 'a',
       # Chart axis style: axis, label_color, label_size, alignment, line or tick, tick color
-      :chxs => '0,8f8b1d,11,0,t,8f8b1d|1,8f8b1d,11,0,t,d6d182|2,100f0e,11,0,t,100f0e',
+      :chxs => "0,#{LABEL_COLOR},11,0,t,#{AXIS_COLOR}|1,#{LABEL_COLOR},11,0,t,#{AXIS_COLOR}|2,#{TARGET_COLOR},11,0,t,#{TARGET_COLOR}",
       # Chart fill: area, type, color
-      :chf => 'bg,s,e6e3b200',
+      :chf => 'bg,s,00000000',
       # Chart axis range: axis, start, end, step
       :chxr => '1,0,12,2',
       # Chart axis tick style: axis, length
@@ -89,8 +93,7 @@ class Month
       # Chart axis label positions: axis, position
       :chxp => [2, (6.4/12)*100].join(','),
       # Chart colors
-      :chco => [ GRAPH_COLORS.first(projects.length), %w(e6e3b200 d15028)].flatten.join(','),
-      # extra light blue: 76b8ab
+      :chco => [ GRAPH_COLORS.sample(projects.length),'00000000', OTHER_COLOR].flatten.join(','),
       # Chart axes
       :chxt => 'x,y,r',
       # Chart axis labels : axis, labels

@@ -28,6 +28,8 @@
             = link_to 'Dashboard', root_path
           %li{ :class => current_page?(settings_path) ? 'selected' : nil }
             = link_to 'Settings', settings_path
+      #subnavigation
+        = yield :subnavigation
     #flash
       - flash.each do |type, message|
         .flash{ :class => type }

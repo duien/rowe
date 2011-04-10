@@ -9,12 +9,18 @@ $green: #8f8b1d
 $red: #d15028
 $orange: mix($red, $gold)
 
+=lighter-font
+  font-family: 'DINPro-Light'
 =light-font
-  font-family: 'St Ryde'
-  font-weight: normal
+  // font-family: 'St Ryde'
+  // font-weight: normal
+  font-family: 'DINPro-Regular'
 =bold-font
-  font-family: 'MEgalopolis Extra'
-  font-weight: normal
+  // font-family: 'MEgalopolis Extra'
+  // font-weight: normal
+  font-family: 'DINPro-Bold'
+=bolder-font
+  font-family: 'DINPro-Black'
 
 body
   +light-font
@@ -22,15 +28,22 @@ input[type="text"], input[type="password"]
   +light-font
 input[type="submit"], a.button
   +light-font
+::-webkit-input-placeholder
+  +lighter-font
 #header
   .title
     h1
-      +bold-font
+      +bolder-font
 #navigation
   .menu
     li
       a
-        +bold-font
+        +light-font
+      &.selected
+        a
+          +bold-font
+#subnavigation
+  ul li.tab.selected div
   
 #page
   .project
@@ -42,7 +55,7 @@ input[type="submit"], a.button
       +bold-font
   form
     .hint
-      +light-font
+      +lighter-font
     .project-fields
       &.header
         +bold-font
@@ -55,6 +68,8 @@ input[type="submit"], a.button
       h2
         +bold-font
       &.oneline
+        .note
+          +lighter-font
         .name
           +bold-font
   

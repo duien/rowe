@@ -18,9 +18,9 @@
       }
     })
 
-    $('#tab-controls li').click(function(){
+    $('#subnavigation li').click(function(){
       selected_tab = $(this).attr('id');
-      $('#tab-controls .tab').removeClass('selected');
+      $('#subnavigation .tab').removeClass('selected');
       $(this).addClass('selected');
 
       $('.tab-content').removeClass('selected');
@@ -45,11 +45,12 @@
   });
 
 
-%ul#tab-controls
-  %li.tab#freckle{ :class => @user.freckle_set_up? ? nil : 'selected' }
-    %div account
-  %li.tab#projects{ :class => @user.freckle_set_up? ? 'selected' : nil }
-    %div your month
+- content_for :subnavigation do
+  %ul
+    %li.tab#freckle{ :class => @user.freckle_set_up? ? nil : 'selected' }
+      %div Account
+    %li.tab#projects{ :class => @user.freckle_set_up? ? 'selected' : nil }
+      %div Your Month
 
 #freckle-content.tab-content{ :class => @user.freckle_set_up? ? nil : 'selected' }
   = form_for @user, :url => update_settings_path do |f|

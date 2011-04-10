@@ -1,86 +1,109 @@
 @import "/fonts/stylesheet.css"
 
-// Color Scheme
-$gold: #caa91e
-$white: #e6e3b2
-$blue: #76b8ab
-$black: #100f0e
-$green: #8f8b1d
-$red: #d15028
-$orange: mix($red, $gold)
+$base03:    #002b36
+$base02:    #073642
+$base01:    #586e75
+$base00:    #657b83
+$base0:     #839496
+$base1:     #93a1a1
+$base2:     #eee8d5
+$base3:     #fdf6e3
+$yellow:    #b58900
+$orange:    #cb4b16
+$red:       #dc322f
+$magenta:   #d33682
+$violet:    #6c71c4
+$blue:      #268bd2
+$cyan:      #2aa198
+$green:     #859900
 
 =color-box($color)
-  border-color: $color
-  background: mix(mix($color, $white), $white)
+  // border-color: $color
+  background: $base2
+  color: $color
+  // background: mix(mix($color, $white), $white)
   .close
     color: $color
 
 
 ul.ui-menu
-  background: lighten($white, 5%)
-  border-color: darken($white, 10%)
+  // TODO needs work
+  background: $base3
+  border-color: $base2
   li.ui-menu-item
     a.ui-corner-all
       color: black
       &.ui-state-hover
-        background: darken($white, 10%)
+        background: $base2
 
 body
-  background: $white
-  color: $black
+  background: $base3
+  color: $base00
 a
-  color: darken($blue, 20%)
+  color: $blue
 input[type="text"], input[type="password"]
-  background: lighten($white, 5%)
-  border-color: darken($white, 10%)
+  background: $base2
+  border-color: $base2
+  color: $base01
   &:focus
-    border-color: $gold
-    background: lighten($white, 8%)
+    background: $base3
 ::-webkit-input-placeholder
-  color: darken($white, 20%)
+  color: $base1
 input[type="submit"], a.button
-  color: lighten($white, 5%)
-  background-image: -webkit-gradient(linear, left top, left bottom, from(lighten($black, 30%)), to(lighten($black, 20%)))
+  background: $base02
+  color: $base0
+  // background-image: -webkit-gradient(linear, left top, left bottom, from(lighten($black, 30%)), to(lighten($black, 20%)))
   &:hover
-    background-image: -webkit-gradient(linear, left top, left bottom, from(lighten($black, 20%)), to(lighten($black, 30%)))
+    // background-image: -webkit-gradient(linear, left top, left bottom, from(lighten($black, 20%)), to(lighten($black, 30%)))
 #header
-  background: lighten($black, 15%)
+  background: $base03
+  // background: lighten($black, 15%)
   .title
     h1
-      text-shadow: lighten($black, 20%) 0 2px 2px
+      color: $base01
+      // text-shadow: lighten($black, 20%) 0 2px 2px
   .user
-    color: $white
+    color: $base01
     a
       color: $blue
 #navigation
-  background: $blue
+  // background: $base02
+  background: $base03
   .menu
     li
       a
-        color: darken($blue, 20%)
-        text-shadow: lighten($blue, 10%) 0 1px 2px
-        &:hover
-          -webkit-box-shadow: inset 1px 1px 2px darken($blue, 10%), inset -1px -1px 2px lighten($blue, 10%)
+        color: $base0
       &.selected
         a
-          background: darken($blue, 20%)
-          color: lighten($blue, 5%)
+          background: $base02
+          color: $base1
           text-shadow: none
-          -webkit-box-shadow: inset 1px 1px 2px darken($blue, 25%)
+#subnavigation
+  background: $base02
+  border-color: $base02
+  color: $base0
+  li.tab
+    div
+      background: $base02
+    &.selected
+      div
+        background: $base3
+        color: $base01
+        // color: $base3
   
 #flash
   .flash
     .message
-      border-color: darken($white, 20%)
+      border-color: $base2
       .close
-        color: darken($white, 30%)
+        color: $base1
       img
     &.notice .message
       +color-box($green)
     &.alert .message
-      +color-box($gold)
+      +color-box($yellow)
     &.warning .message
-      +color-box(mix($red, $gold))
+      +color-box($orange)
     &.error .message
       +color-box($red)
 
@@ -91,25 +114,29 @@ input[type="submit"], a.button
         border-color: $blue
         +color-box($blue)
 #page
-  .odd
-    background: darken($white, 5%)
   .project
+    // &.odd
+      background: $base2
+      .main .hour-progress .progress
+        background: $base3
     .main
       .hour-progress
         .progress
-          background: darken($white, 15%)
+          background: $base2
           .wrapper
             .elapsed-bar
-              border-right-color: $black
+              border-right-color: $base01
             .bar
               background: $green
         .percent
-          color: $green
+          color: $base1
+          // color: $green
     .sub-bar
       .hours
-        color: darken($white, 20%)
+        color: $base1
         .hour
-          color: $green
+          color: $base1
+          // color: $green
       .special
         .ahead
           color: $green
@@ -131,45 +158,58 @@ input[type="submit"], a.button
           color: $red
       .main
         .progress .wrapper .bar
-          background: mix($gold, $orange)
+          background: $yellow
       .sub-bar .special .catch-up
         color: $red
   form
     .hint
-      color: $gold
+      color: $base1
     .project-fields
       &.header
       .info
-        background: $white
+        background: $base3
         .close
-          color: darken($white, 30%)
+          color: $base1
       &:hover .info .close
         &:hover
-          color: $gold
+          color: $red
       &.deleted
-        ::-webkit-input-placeholder
-          color: $white
+        input
+          visibility: hidden
+        .name input
+          background: $base3
+          border-color: $base3
+          visibility: visible
+          text-decoration: line-through
+          color: $base1
+          &[disabled='disabled']
+            color: $base1
+        &:hover .info .close
+          &:hover
+            color: $cyan
+
     fieldset
       h2
-        color: $gold
-        border-bottom-color: $gold
+        color: $cyan
+        border-bottom-color: $cyan
       &.oneline
         .note
-          color: $gold
+          color: $base1
   
-  #tab-controls
-    border-bottom-color: $gold
-    li.tab
-      div
-        background: darken($white, 10%)
-      &.selected
-        div
-          background: $gold
+  // #tab-controls
+  //   border-bottom-color: $yellow
+  //   li.tab
+  //     div
+  //       background: $base2
+  //     &.selected
+  //       div
+  //         background: $yellow
+  //         color: $base3
 body.floating
-  background: lighten($black, 15%)
+  background: $base03
   #page
-    background: $white
+    background: $base3
     form fieldset:nth-of-type(1)
       h2
-        color: lighten($black, 15%)
-        text-shadow: lighten($white, 5%) 0px 2px 2px, $black 0 -1px 0
+        color: $base03
+        // text-shadow: lighten($white, 5%) 0px 2px 2px, $black 0 -1px 0

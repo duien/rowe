@@ -20,7 +20,6 @@ $cyan:      #2aa198
 $green:     #859900
 
 =color-box($color)
-  background: $base2
   color: $color
   .close
     color: $color
@@ -89,12 +88,12 @@ input[type="submit"], a.button
         color: $base01
   
 #flash
+  background: $base03
   .flash
     .message
-      border-color: $base2
+      background: $base02
       .close
         color: $base1
-      img
     &.notice .message
       +color-box($green)
     &.alert .message

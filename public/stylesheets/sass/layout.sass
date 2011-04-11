@@ -114,16 +114,15 @@ input[type="submit"], a.button
         text-align: center
   
 #flash
-  +row
+  & > div
+    +row
   .flash
     +column
     +grid_12
     .message
       margin-top: .5em
-      margin-bottom: .5em
+      margin-bottom: 1.5em
       line-height: 2em
-      border-width: 2px
-      border-style: solid
       padding: 0 0.5em
       .close
         float: right

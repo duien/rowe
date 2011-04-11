@@ -12,12 +12,8 @@ $orange: mix($red, $gold)
 =lighter-font
   font-family: 'DINPro-Light'
 =light-font
-  // font-family: 'St Ryde'
-  // font-weight: normal
   font-family: 'DINPro-Regular'
 =bold-font
-  // font-family: 'MEgalopolis Extra'
-  // font-weight: normal
   font-family: 'DINPro-Bold'
 =bolder-font
   font-family: 'DINPro-Black'
@@ -51,41 +47,34 @@ input[type="submit"], a.button
 #page
   .project
     .status
-      // +bolder-font
       +lighter-font
-
       .time
-        // +bold-font
         +light-font
-
     .main
     .per-day
       text-transform: uppercase
       +lighter-font
       .time
         +light-font
-
     .hours 
       +lighter-font
-
       .time
         +light-font
 
     &.header
       +lighter-font
       text-transform: uppercase
-
       .status
         +lighter-font
+
     &.overall
       .title-bar
         .name
-          // +bold-font
-
 
   .chart
     .title
       +bold-font
+
   form
     .hint
       +lighter-font

@@ -20,16 +20,13 @@ $cyan:      #2aa198
 $green:     #859900
 
 =color-box($color)
-  // border-color: $color
   background: $base2
   color: $color
-  // background: mix(mix($color, $white), $white)
   .close
     color: $color
 
 h2
   color: $base03
-  // background: $base2
 
 ul.ui-menu
   // TODO needs work
@@ -58,6 +55,7 @@ input[type="submit"], a.button
   background: $base02
   color: $base0
   &:hover
+
 #header
   background: $base03
   .title
@@ -67,6 +65,7 @@ input[type="submit"], a.button
     color: $base01
     a
       color: $blue
+
 #navigation
   background: $base03
   .menu
@@ -78,18 +77,16 @@ input[type="submit"], a.button
           background: $base01-5
           color: $base1
           text-shadow: none
+
 #subnavigation
   background: $base01-5
   border-color: $base01-5
   color: $base0
   li.tab
-    div
-      // background: $base02
     &.selected
       div
         background: $base3
         color: $base01
-        // color: $base3
   
 #flash
   .flash
@@ -107,18 +104,8 @@ input[type="submit"], a.button
     &.error .message
       +color-box($red)
 
-.controls
-  .visibility
-    .control
-      .toggle
-        border-color: $blue
-        +color-box($blue)
 #page
   .project
-    // &.odd
-      background: $base2
-      .main .hour-progress .progress
-        background: $base3
     .status
       color: $base1 
 
@@ -152,18 +139,15 @@ input[type="submit"], a.button
         color: $green
     &.behind
       .status
-        // color: mix($red, $base1)
         .time
           color: $red
       .hours .hour.completed
-        // color: $red
       .progress .bar
         background: $yellow
     &.overall
       background: $base2
       .progress
         background: $base1-75 
-        // background: $base3
     &.header
       background: $base1-75
       text-align: center
@@ -206,15 +190,6 @@ input[type="submit"], a.button
         .note
           color: $base1
   
-  // #tab-controls
-  //   border-bottom-color: $yellow
-  //   li.tab
-  //     div
-  //       background: $base2
-  //     &.selected
-  //       div
-  //         background: $yellow
-  //         color: $base3
 body.floating
   background: $base03
   #page
@@ -222,4 +197,3 @@ body.floating
     form fieldset:nth-of-type(1)
       h2
         color: $base03
-        // text-shadow: lighten($white, 5%) 0px 2px 2px, $black 0 -1px 0

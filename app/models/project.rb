@@ -12,6 +12,10 @@ class Project
   key :freckle_id, Integer
   embedded_in :month
 
+  def billable?
+    self.attributes[:billable] || self.budget > 0
+  end
+
   def completed
     self.attributes[:completed] || hours.values.inject(&:+) || 0.0
   end

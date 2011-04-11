@@ -1,4 +1,4 @@
-.controls
+-# .controls
   .visibility
     - if @month.projects.detect(&:ended?)
       .control
@@ -12,6 +12,14 @@
           .text.remove Show unstarted
 
 = render :partial => 'project', :locals => { :project => @month, :extra_class => 'overall' }
+.project.header
+  %div
+    .status for today
+    .info
+      .name progress
+    .per-day remaining
+    .per-day so far
+    .hours overall
 - @month.projects.each do |project|
   - if project.billable?
     = render :partial => 'project', :locals => { :project => project }

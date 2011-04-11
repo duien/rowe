@@ -44,12 +44,43 @@ input[type="submit"], a.button
           +bold-font
 #subnavigation
   ul li.tab.selected div
+    +bold-font
   
 #page
   .project
+    .status
+      // +bolder-font
+      +lighter-font
+
+      .time
+        // +bold-font
+        +light-font
+
+    .main
+    .per-day
+      text-transform: uppercase
+      +lighter-font
+      .time
+        +light-font
+
+    .hours 
+      +lighter-font
+
+      .time
+        +light-font
+
+    &.header
+      +lighter-font
+      text-transform: uppercase
+
+      .status
+        +lighter-font
     &.overall
       .title-bar
-        +bold-font
+        .name
+          // +bold-font
+
+
   .chart
     .title
       +bold-font

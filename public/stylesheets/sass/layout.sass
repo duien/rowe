@@ -98,9 +98,10 @@ input[type="submit"], a.button
         text-decoration: none
         // +round(1em)
 #subnavigation
-  border-top-width: 0.5em
-  border-top-style: solid
+  // border-top-width: 0.5em
+  // border-top-style: solid
   // height: 2em
+  padding-top: 0.5em
   ul
     +row
     li.tab
@@ -147,29 +148,36 @@ input[type="submit"], a.button
         text-align: center
 
 #page
-  padding-top: 0.5em
+
+  .project
+    & > div
+      +row
   .project
     padding-top: 1em
     padding-bottom: 1em
-    .title-bar
-      +row
-      .name
-        +column
-        +clear_1('right')
-        +grid_3
-        line-height: 1.5em
-      .progress-text
-        +column
-        +grid_5
-        font-size: 80%
-        line-height: 1.875em
-        text-align: right
-    .main
-      +row
-      .hour-progress
+
+    .status, .hours
+      +column
+      +grid_2
+      text-transform: uppercase
+      text-align: center
+      position: relative
+        
+
+      .time
+        font-size: 160%
+
+    .info
+      +column
+      +grid_4
+      
+      .title-bar
+        // +row_row
+        font-size: 120%
+        .name
+          line-height: 1.5em
+      .main
         .progress
-          +column
-          +grid_3
           position: relative
           +round(5px)
           overflow: hidden
@@ -180,61 +188,43 @@ input[type="submit"], a.button
               border-right-width: 1px
               border-right-style: solid
               position: absolute
-        .percent
-          +column
-          +grid_1
-          font-size: 80%
-          text-align: left
-          line-height: 1.25em
-      .work-status
-        .remaining
-          +column
-          +grid_2
-          font-size: 80%
-          line-height: 1.25em
-        .scheduled
-          +column
-          +grid_2
-          font-size: 80%
-          line-height: 1.25em
-        .elapsed
-          +column
-          +grid_2
-          font-size: 80%
-          line-height: 1.25em
-    .sub-bar
-      +row
-      .hours
-        +column
-        +clear_1('right')
-        +grid_3
-        font-size: 80%
-        line-height: 1.5em
-        text-align: center
-      .special
-        +column
-        +grid_8
-        font-size: 80%
-        line-height: 1.5em
+    .per-day
+      +column
+      +grid_2
+      line-height: 1.8em
+      text-align: center
+      padding-top: 1.5em
+
+      .time
+        display: inline
     
     &.ended, &.unstarted
-      .title-bar, .main, .sub-bar
+      & > div
         opacity: 0.4
     &.overall
+      padding-top: 1.5em
       padding-bottom: 1.5em
+    &.unbillable
+      .per-day
+        padding-top: 0
+    &.header
+      line-height: 1.5em
+      // padding-top: 0.5em
+      padding-top: 0
+      padding-bottom: 0
+      font-size: 80%
+      .status
+        padding-top: 0
+        padding-bottom: 0
       .title-bar
-        font-size: 120%
-        .name
-          line-height: 2em
-        .progress-text
-          line-height: 2.5em
-      .main
-        .progress
-          line-height: 2em
-        .percent, .remaining, .scheduled, .elapsed
-          line-height: 2.5em
-      .sub-bar
-        font-size: 120%
+        font-size: 100%
+      .per-day
+        padding-top: 0
+      .hours
+        padding-top: 0
+        font-size: 100%
+        line-height: 1.5em
+
   .chart
     +row
     .title

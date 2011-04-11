@@ -2,7 +2,8 @@ module DashboardHelper
   def status_class(project)
     status_classes = []
     status_classes << 'over-budget' if project.over_budget?
-    status_classes << 'behind' if project.behind?
+    status_classes << 'ahead' if project.completed > should_have_done(project)
+    status_classes << 'behind' if project.behind? and time_from_goal(project) > project.time_per_day
     status_classes << 'unstarted' if !project.started?
     status_classes << 'ended' if project.ended?
     status_classes
@@ -30,6 +31,22 @@ module DashboardHelper
     text << "#{project.ended? ? 'ended' : 'ends'} #{format_date(project.end_day)}" if project.respond_to?(:end_day?) and project.end_day?
     text << more_text(project)
     raw(text.compact.join(', ')) unless text.blank?
+  end
+
+  def should_have_done(project)
+    should = project.time_per_day * ( project.num_weekdays_elapsed )
+    should += project.time_per_day if !project.ended? and Date.today.weekday?
+    should
+  end
+
+  def time_from_goal(project)
+    should_have_done(project) - project.completed
+  end
+
+  def status_text(project)
+    if    time_from_goal(project) < 0   then 'ahead'
+    else                                     'to go'
+    end
   end
 
   def more_text(project)

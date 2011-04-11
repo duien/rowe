@@ -8,6 +8,8 @@ $base0:     #839496
 $base1:     #93a1a1
 $base2:     #eee8d5
 $base3:     #fdf6e3
+$base01-5:  mix($base02, $base01)
+$base1-75:  mix(mix($base1, $base2), $base2)
 $yellow:    #b58900
 $orange:    #cb4b16
 $red:       #dc322f
@@ -52,22 +54,17 @@ input[type="text"], input[type="password"]
 input[type="submit"], a.button
   background: $base02
   color: $base0
-  // background-image: -webkit-gradient(linear, left top, left bottom, from(lighten($black, 30%)), to(lighten($black, 20%)))
   &:hover
-    // background-image: -webkit-gradient(linear, left top, left bottom, from(lighten($black, 20%)), to(lighten($black, 30%)))
 #header
   background: $base03
-  // background: lighten($black, 15%)
   .title
     h1
       color: $base01
-      // text-shadow: lighten($black, 20%) 0 2px 2px
   .user
     color: $base01
     a
       color: $blue
 #navigation
-  // background: $base02
   background: $base03
   .menu
     li
@@ -75,16 +72,16 @@ input[type="submit"], a.button
         color: $base0
       &.selected
         a
-          background: $base02
+          background: $base01-5
           color: $base1
           text-shadow: none
 #subnavigation
-  background: $base02
-  border-color: $base02
+  background: $base01-5
+  border-color: $base01-5
   color: $base0
   li.tab
     div
-      background: $base02
+      // background: $base02
     &.selected
       div
         background: $base3
@@ -119,48 +116,61 @@ input[type="submit"], a.button
       background: $base2
       .main .hour-progress .progress
         background: $base3
-    .main
-      .hour-progress
-        .progress
-          background: $base2
-          .wrapper
-            .elapsed-bar
-              border-right-color: $base01
-            .bar
-              background: $green
-        .percent
-          color: $base1
-          // color: $green
-    .sub-bar
-      .hours
-        color: $base1
-        .hour
-          color: $base1
-          // color: $green
-      .special
-        .ahead
-          color: $green
-    &.over-budget
-      .main
-        .progress .wrapper .bar
-          background: $red
-        .percent
-          color: $red
-        .work-status .remaining
-          color: $red
-      .sub-bar
-        .hours .hour.completed
-          color: $red
+    .status
+      color: $base1 
+
+      .time
+        color: $base00
+
+    .per-day
+      color: $base1
+      .time
+        color: $base00
+    .progress
+      background: $base2
+      .wrapper
+        .elapsed-bar
+          border-right-color: $base01
+          &.after
+            border-right-color: $base1
+        .bar
+          background: $green
+    .hours
+      color: $base1
+      .time
+        color: $base00
+        // color: $green
+    .special
+      .ahead
+        color: $green
     
+    &.ahead
+      .status .time
+        color: $green
     &.behind
-      .title-bar
-        .progress-text
+      .status
+        // color: mix($red, $base1)
+        .time
           color: $red
-      .main
-        .progress .wrapper .bar
-          background: $yellow
-      .sub-bar .special .catch-up
-        color: $red
+      .hours .hour.completed
+        // color: $red
+      .progress .bar
+        background: $yellow
+    &.overall
+      background: $base2
+      .progress
+        background: $base1-75 
+        // background: $base3
+    &.header
+      background: $base1-75
+      text-align: center
+      color: $base3
+      .status
+        color: $base3
+      .per-day
+        color: $base3
+      .hours
+        color: $base3
   form
     .hint
       color: $base1

@@ -2,7 +2,8 @@ class Month
   include MongoMapper::Document         
   include ScheduleMath
 
-  GRAPH_COLORS = %w(b58900 cb4b16 dc322f d33682 6c71c4 268bd2 2aa198 859900)#.map{ |c| [c, "#{c}7f"] }.flatten
+  GRAPH_COLORS = %w(93a1a1 586e75 073642)
+  # GRAPH_COLORS = %w(b58900 cb4b16 dc322f d33682 6c71c4 268bd2 2aa198 859900)#.map{ |c| [c, "#{c}7f"] }.flatten
   OTHER_COLOR  = '073642' # base02
   AXIS_COLOR   = 'eee8d5' # base2
   LABEL_COLOR  = '93a1a1' # base1
@@ -18,7 +19,7 @@ class Month
   many :projects
 
   def completed
-    self.projects.select{ |p| p.billable }.map(&:completed).inject(&:+)
+    self.projects.select{ |p| p.billable or p.budget > 0 }.map(&:completed).inject(&:+)
   end
 
   def start_day
@@ -65,6 +66,22 @@ class Month
   end
 
   def chart_url
+    grouped_hours = { :scheduled   => Hash.new{ |h,k| h[k] = 0 },
+                      :nonbillable => Hash.new{ |h,k| h[k] = 0 } }
+    puts grouped_hours.inspect
+    projects.each do |project|
+      # puts project.name
+      key = project.billable? || project.budget > 0 ? :scheduled : :nonbillable
+      dates.each do |date|
+        # puts key.inspect
+        # puts grouped_hours[key].inspect
+        # puts grouped_hours[key][date.to_s]V
+        grouped_hours[key][date.to_s] += project.hours[date.to_s] || 0
+      end
+    end
+
+    
+
     google_chart_url = "http://chart.googleapis.com/chart?"
     google_chart_params = {
       # Chart type: bar vertical stacked
@@ -93,19 +110,25 @@ class Month
       # Chart axis label positions: axis, position
       :chxp => [2, (6.4/12)*100].join(','),
       # Chart colors
-      :chco => [ GRAPH_COLORS.sample(projects.length),'00000000', OTHER_COLOR].flatten.join(','),
+      :chco => GRAPH_COLORS.join(','),
       # Chart axes
       :chxt => 'x,y,r',
       # Chart axis labels : axis, labels
       :chxl => [ '0:', dates.map{ |d| d.day }, '2:', 'target' ].flatten.join('|'),
       # Chart data labels
-      :chdl => [ projects.map{ |p| p.name }, '', 'Other' ].flatten.join('|'),
+      :chdl => %w(Assigned Non-billable Other).join('|'),
+      # :chdl => [ projects.map{ |p| p.name }, '', 'Other' ].flatten.join('|'),
       # Chart data
-      :chd  => 't:' + [
-        projects.map{ |project| dates.map{ |date| project.hours[date.to_s] || 0 }.join(',') },
-        dates.map{ '_' }.join(','),
+      :chd => 't:' + [ 
+        dates.map{ |date| grouped_hours[:scheduled  ][date.to_s] || 0 }.join(','),
+        dates.map{ |date| grouped_hours[:nonbillable][date.to_s] || 0 }.join(','),
         dates.map{ |date| other.hours[date.to_s] || 0 }.join(',')
       ].flatten.join('|')
+      # :chd  => 't:' + [
+      #   projects.map{ |project| dates.map{ |date| project.hours[date.to_s] || 0 }.join(',') },
+      #   dates.map{ '_' }.join(','),
+      #   dates.map{ |date| other.hours[date.to_s] || 0 }.join(',')
+      # ].flatten.join('|')
     }
 
     google_chart_url + google_chart_params.inject([]){ |r,(k,v)| r << "#{k}=#{v}" }.join('&')

@@ -1,6 +1,16 @@
 - unless defined? :extra_class then extra_class = nil end
-.project{ :class => [ cycle(:even, :odd, :name => :row), extra_class ] }
-  .title-bar
-    .name= project.name
-    .progress-text= format_time project.completed
+.project{ :class => [ 'unbillable', cycle(:even, :odd, :name => :row), extra_class ] }
+  %div
+    .status
+      &nbsp;
+      -# .time= format_time project.completed
+      -# logged 
+
+    .info
+      .title-bar
+        .name= project.name
+    .per-day &nbsp;
+    .per-day 
+      .time= format_time project.completed
+      logged
 

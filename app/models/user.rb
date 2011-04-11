@@ -16,7 +16,11 @@ class User
   end
 
   def freckle_set_up?
-    freckle_email? and freckle_account? and freckle_api_token?
+    freckle_email? and
+      freckle_account? and
+      freckle_api_token? and
+      Freckle.establish_connection( :account => freckle_account,
+                                    :token => freckle_api_token )
   end
 
 # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::

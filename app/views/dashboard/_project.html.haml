@@ -1,5 +1,52 @@
 - unless defined? :extra_class then extra_class = nil end
 .project{ :class => [ status_class(project), cycle(:even, :odd, :name => :row), extra_class ] }
+  %div
+    .status
+      .time= format_time time_from_goal(project).abs
+      = status_text(project)
+
+    .info
+      .title-bar
+        .name= project.respond_to?(:name) ? project.name : 'Total'
+      .main
+        .progress
+          .wrapper
+            .elapsed-bar.before{ :style => "width: #{[project.percent_elapsed(:include_today => true), 100].min}%" } &nbsp;
+            .elapsed-bar.after{ :style => "width: #{[project.percent_elapsed, 100].min}%" } &nbsp;
+            .bar{ :style => "width: #{[project.percent_completed, 100].min}%" } &nbsp;
+    .per-day.remaining
+      - if project.ended? and project.completed >= project.budget
+        .time done
+      - elsif project.ended?
+        .time= format_time(project.time_remaining_per_day)
+        under budget
+      - elsif project.over_budget?
+        .time over
+        budget
+      - else
+        .time= format_time(project.time_remaining_per_day)
+        per day
+    -# .per-day.scheduled 
+    -#   .time= format_time(project.time_per_day)
+    -#   original
+    .per-day.elapsed
+      - if project.started? or project.completed > 0
+        .time= format_time(project.time_per_day_so_far)
+        per day
+      - else
+        &nbsp;
+    .hours
+      .time= format_time project.completed
+      of #{format_time project.budget}
+    -# .hours
+      %span.hour.completed= format_time project.completed
+      \/
+      %span.hour.budget= format_time project.budget
+
+
+
+
+-# 
   .title-bar
     .name= project.respond_to?(:name) ? project.name : 'Total'
     .progress-text= progress_text(project)

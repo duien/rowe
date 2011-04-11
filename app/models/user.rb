@@ -41,7 +41,10 @@ class User
   end
 
   # Make email case-insensitive for login purposes
-  before_save do
+  before_save :downcase_email
+
+  def downcase_email
+    puts self.inspect
     self.email.downcase! if self.email
   end
 

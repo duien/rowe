@@ -39,6 +39,17 @@ class User
     @freckle_user
   end
 
+  # Make email case-insensitive for login purposes
+  before_save do
+    self.email.downcase! if self.email
+  end
+
+  def self.find_for_authentication(conditions)
+    conditions[:email].downcase!
+    super(conditions)
+  end
+
+
 # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
 # validates_presence_of :attribute
 

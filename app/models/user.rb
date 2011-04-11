@@ -8,6 +8,7 @@ class User
   key :freckle_email, String
   key :freckle_account, String
   key :freckle_api_token, String
+  key :admin, Boolean, :default => false
 
   many :months
 

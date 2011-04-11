@@ -26,9 +26,8 @@
   - else
     = render :partial => 'unbillable', :locals => { :project => project }
 = render :partial => 'unbillable', :locals => { :project => @month.other, :extra_class => 'other' }
-.project{ :class => cycle(:even, :odd, :name => :row) }
-  .chart
-    .title
-      Daily Work
-    .wrap
-      %img{ :src => @month.chart_url }
+
+.chart
+  %h2 Daily Work
+  .wrap
+    %img{ :src => @month.chart_url }

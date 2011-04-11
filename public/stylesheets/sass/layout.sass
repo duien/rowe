@@ -22,6 +22,13 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 .hidden
   display: none !important
 
+h2
+  +column
+  +grid_12
+  margin-top: 1em
+  margin-bottom: 1em
+  border-bottom-style: solid
+
 /* JQUERY UI OVERRIDES */
 ul.ui-menu
   border-width: 2px
@@ -208,7 +215,7 @@ input[type="submit"], a.button
       .per-day
         padding-top: 0
     &.header
-      line-height: 1.5em
+      line-height: 1.8em
       // padding-top: 0.5em
       padding-top: 0
       padding-bottom: 0
@@ -223,16 +230,10 @@ input[type="submit"], a.button
       .hours
         padding-top: 0
         font-size: 100%
-        line-height: 1.5em
+        line-height: 1.8em
 
   .chart
     +row
-    .title
-      +column
-      +grid_12
-      line-height: 1.5em
-      padding-bottom: 0.5em
-      font-size: 120%
     .wrap
       +column
       +grid_12
@@ -280,13 +281,6 @@ input[type="submit"], a.button
         +grid_12
         input
           margin-top: 0.25em
-      h2
-        +column
-        +grid_12
-        border-bottom-width: 4px
-        border-bottom-style: solid
-        margin-top: 1em
-        margin-bottom: 1em
       &.oneline
         .name
           +column

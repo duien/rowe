@@ -9,7 +9,6 @@
     = stylesheet_link_tag 'layout'
     = stylesheet_link_tag 'colors'
     = stylesheet_link_tag 'fonts'
-    -# = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = csrf_meta_tag
   %body{ :class => content_for(:body_class) }
@@ -26,7 +25,7 @@
         - flash.each do |type, message|
           .flash{ :class => type }
             .message
-              = image_tag "#{type}-color-dark.png"
+              = image_tag "#{type}-color.png"
               .close &#10005;
               = message
     - if user_signed_in?

@@ -4,8 +4,8 @@
     %h2 Change your password
   = devise_error_messages!
   = f.hidden_field :reset_password_token
-  %fieldset
-    .name.oneline
+  %fieldset.oneline
+    .name
       = f.label :password
     .medium-field
       = f.password_field :password

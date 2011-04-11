@@ -11,6 +11,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'freckle', :git => 'https://github.com/duien/freckle-client.git'
 gem 'hassle', :git => 'https://github.com/koppen/hassle.git'
+gem 'SystemTimer', '~> 1.2.0'
 
 group :test do
   gem 'rspec'

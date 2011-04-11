@@ -1,30 +1,26 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate_user!
-  before_filter :establish_freckle_connection, :unless => :needs_to_set_up_freckle?
+  # before_filter :establish_freckle_connection, :if => :user_signed_in?
 
   protected
 
-  def establish_freckle_connection
-    if current_user.present? and current_user.freckle_set_up?
-      Freckle.establish_connection( :account => current_user.freckle_account,
-                                    :token => current_user.freckle_api_token
-                                    )
+  # def establish_freckle_connection
+  #   current_user.establish_freckle_connection
+  # end
+
+  def ensure_freckle_set_up
+    case current_user.establish_freckle_connection
+    when :field_missing
+      flash[:alert] = 'Please set up your Freckle account'
+      redirect_to settings_path
+    when :invalid_email
+      flash[:alert] = 'No user found with Freckle email address'
+      redirect_to settings_path
+    when :invalid_api_token
+      flash[:alert] = 'Invalid API token'
+      redirect_to settings_path
     end
   end
 
-  def ensure_freckle_set_up
-    flash[:alert] = 'Please set up your user information first'
-    redirect_to settings_path
-  end
-
-  def needs_to_set_up_freckle?
-    # If you're not logged in, you don't need to set it up
-    return false unless current_user
-
-    !current_user.freckle_set_up?
-  end
-
-
-    
 end

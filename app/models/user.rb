@@ -44,7 +44,6 @@ class User
   before_save :downcase_email
 
   def downcase_email
-    puts self.inspect
     self.email.downcase! if self.email
   end
 

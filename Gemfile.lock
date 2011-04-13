@@ -79,6 +79,9 @@ GEM
     i18n (0.5.0)
     jnunemaker-validatable (1.8.4)
       activesupport (>= 2.3.4)
+    jquery-rails (0.2.7)
+      rails (~> 3.0)
+      thor (~> 0.14.4)
     json (1.4.6)
     linecache (0.43)
     linecache19 (0.5.12)
@@ -174,6 +177,7 @@ DEPENDENCIES
   haml-rails
   hassle!
   hpricot
+  jquery-rails (>= 0.2.6)
   mongo
   mongo_mapper
   rails (= 3.0.3)

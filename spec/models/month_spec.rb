@@ -45,6 +45,12 @@ describe Month do
         month.completed.should == 5
       end
     end
+
+    context "with no projects" do
+      it "should return 0" do
+        Month.new.completed.should == 0
+      end
+    end
   end
 end
       

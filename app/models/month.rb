@@ -19,7 +19,7 @@ class Month
   many :projects
 
   def completed
-    ( self.projects.select{ |p| p.billable or p.budget > 0 }.map(&:completed).inject(&:+) or 0 ) + other.completed
+    self.projects.select{ |p| p.billable or p.budget > 0 }.map(&:completed).sum + other.completed
   end
 
   def start_day

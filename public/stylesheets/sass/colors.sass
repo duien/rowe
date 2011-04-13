@@ -8,8 +8,11 @@ $base0:     #839496
 $base1:     #93a1a1
 $base2:     #eee8d5
 $base3:     #fdf6e3
+
+$base01-25: mix($base01-5, $base01)
 $base01-5:  mix($base02, $base01)
 $base1-75:  mix(mix($base1, $base2), $base2)
+
 $yellow:    #b58900
 $orange:    #cb4b16
 $red:       #dc322f
@@ -71,6 +74,8 @@ input[type="submit"], a.button
     li
       a
         color: $base0
+        &:hover
+          background: $base02
       &.selected
         a
           background: $base01-5
@@ -82,6 +87,10 @@ input[type="submit"], a.button
   border-color: $base01-5
   color: $base0
   li.tab
+    div
+      &:hover
+        background: $base01-25
+        color: $base1
     &.selected
       div
         background: $base3

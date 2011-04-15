@@ -9,8 +9,8 @@ $base1:     #93a1a1
 $base2:     #eee8d5
 $base3:     #fdf6e3
 
-$base01-25: mix($base01-5, $base01)
 $base01-5:  mix($base02, $base01)
+$base01-25: mix($base01-5, $base01)
 $base1-75:  mix(mix($base1, $base2), $base2)
 
 $yellow:    #b58900
@@ -197,6 +197,25 @@ input[type="submit"], a.button
       &.oneline
         .note
           color: $base1
+    .month
+      fieldset.oneline
+        .tiny-field
+          color: $base1
+        .small-field
+          .day
+            background: $base2
+            .vacation-text
+              visibility: hidden
+          &.vacation
+            .day
+              background: $green
+              color: $base3
+              .vacation-text
+                visibility: visible
+                padding-left: 0.5em
+          &.blank
+            .day
+              background: $base3
   
 body.floating
   background: $base03

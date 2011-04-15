@@ -14,6 +14,7 @@ class Month
   key :last_update, Time
   key :budget, Float
   key :num_weekdays, Integer
+  key :vacation_days, Array, :typecast => 'Integer'
 
   belongs_to :user
   many :projects

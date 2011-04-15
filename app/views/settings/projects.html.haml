@@ -1,0 +1,64 @@
+:javascript
+  $(function(){
+    $('#project-select').autocomplete({ source: #{@projects_for_js.to_json},
+      select: function(event, ui) { 
+        console.log(ui);
+        var html = $(#{(render :partial => 'project', :locals => { :project => Project.new }).inspect});
+        html.find('#month_projects__freckle_id').val(ui.item.id);
+        html.find('#month_projects__name').val(ui.item.label);
+        html.find('#month_projects__billable').val(ui.item.billable);
+
+        $('.project-fields.message').addClass('remove');
+        $('.project-fields.header').removeClass('remove');
+        $('#add-project-header').before(html);
+        html.find('#month_projects__name').focus();
+
+        $('#project-select').val('');
+        return false;
+      }
+    })
+
+    $('.project-fields .close').live('click', function(){
+      var fields = $(this).parent().parent()
+      var delete_field = fields.find('#month_projects___delete')
+      if(fields.hasClass('deleted')){
+        // delete_field.val(false)
+        fields.removeClass('deleted')
+        fields.find('input').attr('disabled', false)
+        fields.find('.info .close').html('&#10005;').attr('title', 'Delete')
+      } else {
+        // delete_field.val(true)
+        fields.addClass('deleted')
+        fields.find('input').attr('disabled', true)
+        fields.find('.info .close').html('&#8634;').attr('title', 'Undo')
+      }
+    })
+  })
+= render 'navigation', :selected => 'projects'
+= form_for @user.current_month, :url => update_projects_settings_path do |f|
+  = f.hidden_field :last_update, :value => nil
+  %fieldset.oneline
+    .name Total Budget
+    .small-field= f.text_field :budget, :value => f.object.attributes['budget'], :placeholder => f.object.budget
+    .note leave blank for 6.4 hours per weekday
+  %fieldset.oneline
+    .name Weekdays
+    .small-field= f.text_field :num_weekdays, :value => f.object.attributes['num_weekdays'], :placeholder => f.object.num_weekdays
+  %fieldset
+    %h2 Projects
+  .project-fields.header{ :class => @user.current_month.projects.empty? ? 'remove' : nil }
+    .name Name
+    .budget Budget
+    .start Start
+    .end End
+    = render :partial => 'project', :collection => @user.current_month.projects
+  - if @user.current_month.projects.empty?
+    .project-fields.message
+      .name.hint Add your first project below!
+  - else
+  .project-fields#add-project-header
+    .name
+      %input#project-select{ :placeholder => 'Start typing a project name', :type => 'text' }
+  %fieldset
+    .submit
+      = f.submit 'Update Projects'

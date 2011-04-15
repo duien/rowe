@@ -1,0 +1,34 @@
+= render 'navigation', :selected => 'account'
+= form_for @user, :url => update_account_settings_path do |f|
+  %fieldset.oneline
+    .name
+      = f.label :name, 'Your Name'
+    .medium-field
+      = f.text_field :name
+  %fieldset.oneline
+    .name
+      = f.label :email, 'Email Address'
+    .medium-field
+      = f.text_field :email
+  %fieldset
+    %h2 Freckle
+  %fieldset.oneline
+    .name
+      = f.label :freckle_email, 'Email Address'
+    .medium-field
+      = f.text_field :freckle_email
+    .note the email address you use to log in to Freckle
+  %fieldset.oneline
+    .name
+      = f.label :freckle_account,'Account'
+    .medium-field
+      = f.text_field :freckle_account
+    .note the &lsquo;my-company&rsquo; in my-company.letsfreckle.com
+  %fieldset.oneline
+    .name
+      = f.label :freckle_api_token, 'API token'
+    .medium-field
+      = f.text_field :freckle_api_token
+  %fieldset
+    .submit
+      = f.submit

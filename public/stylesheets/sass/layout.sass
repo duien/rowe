@@ -109,7 +109,8 @@ input[type="submit"], a.button
       +grid_2
       &:first-child
         +clear_1(left)
-      div
+      a
+        display: block
         line-height: 2em
         text-align: center
   
@@ -229,6 +230,7 @@ input[type="submit"], a.button
       +column
       +grid_12
   form
+    margin-top: 2em
     .project-fields
       +row
       &.header
@@ -327,11 +329,6 @@ input[type="submit"], a.button
             content: ""
           &:last-child:before
             content: " or "
-  .tab-content
-    display: none
-    padding-top: 1em
-    &.selected
-      display: block
   .freckle_project
     line-height: 2em
     .added, .not_added

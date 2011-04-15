@@ -1,6 +1,21 @@
 class SettingsController < ApplicationController
-  def settings
+  def account
     @user = current_user
+  end
+
+  def update_account
+    if current_user.update_attributes(params[:user])
+      flash[:notice] = "Account settings updated"
+      redirect_to account_settings_path
+    else
+      flash[:error] = "Settings could not be updated"
+      render :account
+    end
+  end
+
+  def projects
+    @user = current_user
+
     if @user.freckle_set_up?
       @freckle_projects = Freckle::Project.all
       f_user = Freckle::User.by_email(@user.freckle_email)
@@ -9,18 +24,29 @@ class SettingsController < ApplicationController
     end
   end
 
-  def update
-    success = if    params[:user].present?  then current_user.update_attributes(params[:user])
-              elsif params[:month].present?
-                month = params[:month].inject({}){ |res, (k,v)| res.update( k => v.blank? ? nil : v ) }
-                current_user.current_month.update_attributes(month)
-              end
-    if success
-      flash[:notice] = "Settings updated"
-      redirect_to settings_path
+  def update_projects
+    month = params[:month].inject({}){ |res, (k,v)| res.update( k => v.blank? ? nil : v ) }
+    if current_user.current_month.update_attributes(month)
+      flash[:notice] = "Projects updated"
+      redirect_to projects_settings_path
     else
-      flash[:error] = "Settings could not be updated"
-      render :settings
+      flash[:error] = "Projects could not be updated"
+      render :projects
+    end
+  end
+
+  def vacation
+    @user = current_user
+  end
+
+  def update_vacation
+    month = params[:month].inject({}){ |res, (k,v)| res.update( k => v.blank? ? nil : v ) }
+    if current_user.current_month.update_attributes(month)
+      flash[:notice] = "Vacation updated"
+      redirect_to vacation_settings_path
+    else
+      flash[:error] = "Vacation could not be updated"
+      render :vacation
     end
   end
 

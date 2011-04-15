@@ -13,13 +13,13 @@ class ApplicationController < ActionController::Base
     case current_user.establish_freckle_connection
     when :field_missing
       flash[:alert] = 'Please set up your Freckle account'
-      redirect_to settings_path
+      redirect_to account_settings_path
     when :invalid_email
       flash[:alert] = 'No user found with Freckle email address'
-      redirect_to settings_path
+      redirect_to account_settings_path
     when :invalid_api_token
       flash[:alert] = 'Invalid API token'
-      redirect_to settings_path
+      redirect_to account_settings_path
     end
   end
 

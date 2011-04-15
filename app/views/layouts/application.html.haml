@@ -34,8 +34,8 @@
         %ul.menu
           %li{ :class => current_page?(root_path) ? 'selected' : nil }
             = link_to 'Dashboard', root_path
-          %li{ :class => current_page?(settings_path) ? 'selected' : nil }
-            = link_to 'Settings', settings_path
+          %li{ :class => (current_page?(account_settings_path) || current_page?(projects_settings_path) || current_page?(vacation_settings_path)) ? 'selected' : nil }
+            = link_to 'Settings', projects_settings_path
       #subnavigation
         = yield :subnavigation
     #page

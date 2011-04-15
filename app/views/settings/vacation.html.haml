@@ -1,0 +1,49 @@
+:javascript
+  $(function(){
+    $(".month fieldset.oneline .small-field:not(.blank)").click(function(){
+      $(this).toggleClass('vacation')
+    })
+
+    $('form').submit(function(){
+      console.log('preparing vacation : ' + $('.small-field.vacation').length)
+      $.each( $('.small-field.vacation .day'), function(_, day){
+        $(this).append('<input type="hidden" name="month[vacation_days][]" value="' + $(day).attr('data-day') + '" />')
+      })
+    })
+  })
+= render 'navigation', :selected => 'vacation'
+= form_for @user.current_month, :url => update_vacation_settings_path do |f|
+  %fieldset
+    %h2 #{@user.current_month.month.strftime("%B")} Vacation Calendar
+  %fieldset.oneline{ :style => "font-family: 'DINPro-Bold'; text-align: center"}
+    .small-field Monday
+    .small-field Tuesday
+    .small-field Wednesday
+    .small-field Thursday
+    .small-field Friday
+    .tiny-field Sat
+    .tiny-field Sun
+  .month
+    - month = (Time.now.beginning_of_month.to_date .. Time.now.end_of_month.to_date).group_by(&:cweek)
+    - month.map{ |week_num, days| month[week_num] = days.group_by(&:wday) }
+    - month.keys.sort.each do |week_num|
+      - week = month[week_num]
+      %fieldset.oneline
+        - (1..5).map do |day_of_week|
+          - day = week[day_of_week].try(:first).try(:day)
+          - if day
+            .small-field{ :class => @user.current_month.vacation_days.include?(day) ? 'vacation' : nil }
+              .day{ :'data-day' => day }
+                = day
+                %span.vacation-text vacation
+          - else
+            .small-field.blank
+              .day &nbsp;
+        .tiny-field
+          .day= week[6].try(:first).try(:day)
+        .tiny-field
+          .day= week[0].try(:first).try(:day)
+  %fieldset
+    .submit
+      = f.submit 'Update Vacation'
+

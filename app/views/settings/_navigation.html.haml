@@ -1,0 +1,11 @@
+-# - unless defined? selected
+-#   - selected = nil
+- selected ||= nil
+- content_for :subnavigation do
+  %ul
+    %li.tab#account{ :class => selected == 'account' ? 'selected' : nil }
+      = link_to 'Account', account_settings_path
+    %li.tab#projects{ :class => selected == 'projects' ? 'selected' : nil }
+      = link_to 'Your Projects', projects_settings_path
+    %li.tab#vacation{ :class => selected == 'vacation' ? 'selected' : nil }
+      = link_to 'Vacation', vacation_settings_path

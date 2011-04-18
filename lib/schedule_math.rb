@@ -51,7 +51,8 @@ module ScheduleMath
   end
 
   def num_weekdays
-    Date.weekdays_in_range(self.start_day, self.end_day)
+    skip =  self.respond_to?(:vacation_days) ? self.vacation_days : []
+    Date.weekdays_in_range(self.start_day, self.end_day, :skip => skip)
   end
 
   def num_weekdays_remaining
@@ -63,7 +64,8 @@ module ScheduleMath
   def num_weekdays_elapsed
     # doesn't include today
     end_at = self.ended? ? self.end_day : Date.today - 1
-    Date.weekdays_in_range(self.start_day, end_at)
+    skip =  self.respond_to?(:vacation_days) ? self.vacation_days : []
+    Date.weekdays_in_range(self.start_day, end_at, :skip => skip)
   end
 
   def time_per_day

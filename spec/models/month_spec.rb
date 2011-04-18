@@ -51,6 +51,18 @@ describe Month do
         Month.new.completed.should == 0
       end
     end
+  end # describe "#completed"
+
+  describe "#num_weekdays" do
+    context "with vacation configured" do
+      subject{ Factory.build(:month_with_vacation) }
+      its(:num_weekdays){  should == 18 }
+    end
+
+    context "without vacation" do
+      subject{ Factory.build(:month_without_vacation) }
+      its(:num_weekdays){ should == 23 }
+    end
   end
 end
       

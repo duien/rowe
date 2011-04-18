@@ -41,9 +41,6 @@
     .name Total Budget
     .small-field= f.text_field :budget, :value => f.object.attributes['budget'], :placeholder => f.object.budget
     .note leave blank for 6.4 hours per weekday
-  %fieldset.oneline
-    .name Weekdays
-    .small-field= f.text_field :num_weekdays, :value => f.object.attributes['num_weekdays'], :placeholder => f.object.num_weekdays
   %fieldset
     %h2 Projects
   .project-fields.header{ :class => @user.current_month.projects.empty? ? 'remove' : nil }

@@ -40,7 +40,12 @@ class SettingsController < ApplicationController
   end
 
   def update_vacation
-    month = params[:month].inject({}){ |res, (k,v)| res.update( k => v.blank? ? nil : v ) }
+    month = if params[:month].present?
+              params[:month].inject({}){ |res, (k,v)| res.update( k => v.blank? ? nil : v ) }
+            else
+              { :vacation_days => [] }
+            end
+
     if current_user.current_month.update_attributes(month)
       flash[:notice] = "Vacation updated"
       redirect_to vacation_settings_path
